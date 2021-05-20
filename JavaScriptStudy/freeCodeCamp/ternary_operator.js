@@ -22,4 +22,4 @@ function checkSign(a) {
   return a < 0 ? "negative" : a > 0 ? "positive" : "zero";
 }
 
-console.log(checkSign(-1))
+console.log(checkSign(-1));
