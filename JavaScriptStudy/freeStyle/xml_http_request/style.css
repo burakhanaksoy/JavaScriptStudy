@@ -1,0 +1,20 @@
+.get-data-btn {
+  background-color: pink;
+  margin: 2px;
+}
+
+.post-data-btn {
+  background-color: aqua;
+  margin: 2px;
+}
+
+.buttons {
+  border: 1px solid red;
+  width: 15rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  background-color: whitesmoke;
+}
