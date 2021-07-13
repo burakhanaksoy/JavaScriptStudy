@@ -375,6 +375,8 @@ fish.type = 'Fishes';
 fish.displayType(); // Output:Fishes
 ```
 
+`<b>Objects created through Object.create(anotherObject) takes anotherObject as their immediate prototype</b>`
+
 ---
 
 <div id="inheritance">
