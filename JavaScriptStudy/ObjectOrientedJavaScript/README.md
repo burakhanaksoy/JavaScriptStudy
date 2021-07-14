@@ -21,6 +21,7 @@
 [Abstraction](#abstractionn)
 [Getters and Setters](#get-and-set)
 [Making a Small Stopwatch App](#stopwatch)
+[Prototypes](#prototype)
 
 <div id="principles">
 <h2>Four Principles of OOP</h2>
@@ -544,4 +545,75 @@ console.log(myAnotherCircle.defaultLocation); // Doesn't execute
     <img width="445" alt="Screen Shot 2021-07-14 at 8 10 18 AM" src="https://user-images.githubusercontent.com/31994778/125564912-38efac34-bd27-47ec-a589-ba5a365ab745.png">
     <h1 align="center">🥳</h1>
   </p>
+  
+---
+
+<div id="prototype">
+<h2>Prototypes</h2>
+  </div>
+  
+  <b><i>"Prototype is a very important topic in JavaScript. It is used for inheritance and abstraction."</b></i>
+  
+  Let's look at the following code
+  
+  ```js
+  function User(email, name) {
+  this.email = email;
+  this.name = name;
+  this.online = false;
+
+  this.login = function() {
+    console.log(`${this.email} has logged in.`);
+  };
+  this.logout = function() {
+    console.log(`${this.email} has logged out.`);
+  };
+}
+```
+
+This code is very dull and boring to look at... Lot's of `this` and methods and properties are stacked together...
+
+Let's use `prototype`!
+
+<p align="center">
+  <img width="500" alt="Screen Shot 2021-07-14 at 9 38 48 PM" src="https://user-images.githubusercontent.com/31994778/125675187-8a1dca75-694c-497b-bca8-17835e50ad65.png">
+  </p>
+
+[In this reference](https://timkadlec.com/2008/01/using-prototypes-in-javascript/) I found out the following quote
+
+>Prototypes allow you to easily define methods to all instances of a particular object. The beauty is that the method is applied to the prototype, so it is only stored in the memory once, but every instance of the object has access to it.
+
+
+```js
+function User(email, name) {
+  this.email = email;
+  this.name = name;
+  this.online = false;
+}
+
+User.prototype = {
+  login: function() {
+    console.log(`${this.email} has logged in.`);
+  },
+  logout: function() {
+    console.log(`${this.email} has logged out.`);
+  },
+};
+```
+
+This is a better implementation.
+
+- We separated methods from properties.
+- Looks better.
+- Best practice.
+- Abstraction.
+
+Note: `Every object has a prototype`.
+  
+  ---
+  
+  Now, let's create an admin user.
+  
+  Admin user should have the same properties tht a `User` has and it must have some additional ones. For example, an admin user must have a `deleteUser` method to delete whomever they want.
+  
   
