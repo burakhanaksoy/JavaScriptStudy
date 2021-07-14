@@ -14,6 +14,13 @@
 <b>Table Of Contents</b> |
 ------------ | 
 [Four Principles of OOP](#principles) 
+[Objects](#objects)
+[Value Types & Reference Types](#value-reference)
+[Adding and Removing Properties](#adding-removing-properties)
+[Enumerating Properties](#enumerating-properties)
+[Abstraction](#abstractionn)
+[Getters and Setters](#get-and-set)
+[Making a Small Stopwatch App](#stopwatch)
 
 <div id="principles">
 <h2>Four Principles of OOP</h2>
@@ -124,4 +131,409 @@ function getWage(baseSalary, overtime, rate) {
   - Inheritance: Eliminate redundant code.
   - Polymorphism: Refactor ugly switch / case statements.
   
-</div>
+
+---
+
+  <div id="objects">
+  <h2>Objects</h2>
+  </div>
+  
+  <h3>Object Literals</h3>
+  
+  Object literal is a simple way to define an object. For example:
+  
+  ```js
+  const circle = {
+  radius: 1,
+  location: {
+    x: 1,
+    y: 2,
+  },
+  draw: function() {
+    console.log("draw");
+  },
+};
+  ```
+  
+  The circle object has properties `radius`, `location`. It has a method `draw`.
+  
+  ---
+  
+  <h3>Factory</h3>
+  
+  Factories are used to create objects.
+  
+  ```js
+  // Factory function
+function createCircle(radius) {
+  return {
+    radius,
+    location: {
+      x: 1,
+      y: 2,
+    },
+    draw: function() {
+      console.log("draw");
+    },
+  };
+}
+
+
+let myCircle = createCircle(1);
+  ```
+  
+  With this code, we created a `myCircle` object from `createCircle(radius)` function.
+  
+  <p align="center">
+  <img width="448" alt="Screen Shot 2021-07-13 at 6 06 22 PM" src="https://user-images.githubusercontent.com/31994778/125476377-18ab342c-9410-4fdf-bb0d-b05087a30ba2.png">
+  </p>
+  
+  <h3>Constructors</h3>
+  
+  We can also create `myCircle` object with a `Constructor Function`.
+  
+  <b>The naming convention used for a constructor is different. We start with first letter upper-case</b>
+  
+  ```js
+  // Constructor Function
+
+function Circle(radius) {
+  this.radius = radius;
+  (this.location = {
+    x: 1,
+    y: 2,
+  }),
+    (this.draw = function() {
+      console.log("draw");
+    });
+}
+
+let circle = new Circle(1);
+  ```
+  
+  Here, we created `circle` object by using `Circle` constructor.
+  
+  ><b>Every object has a `constructor` property which references the constructor function that is used to create that object.</b>
+  
+  ---
+  
+  <div id="value-reference">
+  <h2>Value Types & Reference Types</h2>
+  </div>
+  
+  <p align="center">
+    <img width="500" alt="Screen Shot 2021-07-13 at 6 30 34 PM" src="https://user-images.githubusercontent.com/31994778/125480626-b8fa2433-2e37-43af-aaf9-526a8bccbbd7.png">
+  </p>
+  
+  This is the same as `Pass by value & pass by reference`.
+  
+  ```js
+  let x = 10;
+
+let y = x;
+
+x = 20;
+
+console.log(x); // 20
+console.log(y); // 10
+  ```
+  
+  ```js
+  let x = { value: 10 };
+
+let y = x;
+
+x.value = 20;
+
+console.log(x); // { value: 20 }
+console.log(y); // { value: 20 }
+  ```
+  
+  ><b>Here, as you can see, when x and y are primitive types, i.e., value types, change in x doesn't mutate y. However, when they are reference types, change in x is reflected on y.</b>
+  
+  <p align="center">
+  <img width="500" alt="Screen Shot 2021-07-13 at 6 46 45 PM" src="https://user-images.githubusercontent.com/31994778/125483498-4f336cc6-2888-48dc-a6ef-e0a30d1ed4e7.png">
+    </p>
+  
+  In the latter case, both x and y point to the same place in the memory. So change in one is reflected on the other as they are referencing same memory location.
+  
+   <p align="center">
+  <img width="500" alt="Screen Shot 2021-07-13 at 6 51 43 PM" src="https://user-images.githubusercontent.com/31994778/125484294-9878f356-d1d4-4ed8-a96e-306c13312983.png">
+    </p>
+  
+  ---
+  
+  <div id="adding-removing-properties">
+  <h2>Adding and Removing Properties</h2>
+  </div>
+  
+  <b><i>"Objects in JavaScript are dynamic, meaning that we can add/remove their properties."</b></i>
+  
+  ```js
+  function person(name, lastName, age) {
+  return {
+    name,
+    lastName,
+    age,
+  };
+}
+
+let burak = person("Burak", "Aksoy", 26);
+
+burak.occupation = "Junior Developer";
+
+console.log(burak);
+
+/*
+{
+  name: 'Burak',
+  lastName: 'Aksoy',
+  age: 26,
+  occupation: 'Junior Developer'
+}
+*/
+```
+  
+  We can delete properties by
+  
+  `delete`
+
+  ```js
+  function person(name, lastName, age) {
+  return {
+    name,
+    lastName,
+    age,
+  };
+}
+
+let burak = person("Burak", "Aksoy", 26);
+
+burak.occupation = "Junior Developer";
+
+delete burak.age;
+
+console.log(burak); // { name: 'Burak', lastName: 'Aksoy', occupation: 'Junior Developer' }
+  ```
+  
+  ---
+
+  <div id="enumerating-properties">
+  <h2>Enumerating Properties</h2>
+  </div>
+  
+  ```js
+  for (let key in burak) {
+  console.log(key);
+}
+/*
+name
+lastName
+occupation
+*/
+  ```
+  ```js
+  for (let key in burak) {
+  console.log(`${key}: ${burak[key]}`);
+}
+
+/*
+name: Burak
+lastName: Aksoy
+occupation: Junior Developer
+*/
+  ```
+  
+  We can enumerate with that key and take the value with obj[key].
+  
+  We can also get only properties (not methods) by
+  
+  ```js
+  for (let key in burak) {
+  if (typeof burak[key] !== "function") {
+    console.log(`${key}: ${burak[key]}`);
+  }
+}
+  ```
+  
+  Look whether a property inside an object by `if(prop in obj)`
+  
+  ```js
+  if ("occupations" in burak) {
+  console.log("Yes"); // Yes
+}
+  ```
+  
+  ---
+  
+  <div id="abstractionn">
+  <h2>Abstraction</h2>
+  </div>
+  
+  Let's say that we have a method inside our object that we want to hide from user.
+  
+  ```js
+  function Circle(radius) {
+  this.radius,
+    (this.location = {
+      x: 1,
+      y: 1,
+    });
+  this.idealLocation = function() {
+    // ... some logic here
+  };
+  this.draw = function() {
+    console.log("draw");
+  };
+}
+```
+  
+  Here, I have `idealLocation` method inside my constructor function. However, a user can easily reach `idealLocation` method. What can we do to hide it? Because if this method or `location` property is accessed and changed by the user, then it will mess the object up :))
+  
+  <p align="center">
+    <img width="450" alt="Screen Shot 2021-07-13 at 8 03 10 PM" src="https://user-images.githubusercontent.com/31994778/125494989-9a5bdbd2-cb2b-41b4-ac28-bc4b5f359acc.png">
+  </p>
+  
+  <h3>Private Properties and Methods</h3>
+  
+  ```js
+  function Circle(radius) {
+  this.radius;
+  let defaultLocation = {
+    x: 1,
+    y: 1,
+  };
+  let getIdealLocation = function() {
+    // ... some logic here
+    defaultLocation = {
+      x: 0,
+      y: 0,
+    };
+  };
+  this.draw = function() {
+    getIdealLocation();
+
+    console.log(defaultLocation);
+  };
+}
+
+let myAnotherCircle = new Circle(1);
+
+myAnotherCircle.draw();
+  ```
+  
+  Here, we changed this keyword with let for some properties and methods. We only did these for props and methods that we want to hide from the user.
+  
+  <p align="center">
+    <img width="567" alt="Screen Shot 2021-07-13 at 8 45 24 PM" src="https://user-images.githubusercontent.com/31994778/125500616-357ad692-ed07-4def-8535-f62e8c6338fa.png">
+  </p>
+  
+  As it is seen here, the user can only access draw method and radius property.
+  
+  ---
+  
+  <div id="get-and-set">
+  <h2>Getters and Setters</h2>
+  </div>
+  
+  From the previous example, we see that we can't reach `defaultLocation`. But what if I want to get it with a getter? or set it with a setter?
+  
+  Using `Object.defineProperty()` method is the way to go!
+  
+  ```js
+  function Circle(radius) {
+  this.radius;
+  let defaultLocation = {
+    x: 1,
+    y: 1,
+  };
+  let getIdealLocation = function() {
+    // ... some logic here
+    defaultLocation = {
+      x: 0,
+      y: 0,
+    };
+  };
+  this.draw = function() {
+    getIdealLocation();
+
+    console.log(defaultLocation);
+  };
+
+  Object.defineProperty(this, "defaultLocation", { // Here, we used 'this'. Always use 'this'..
+    get: function() {
+      return defaultLocation;
+    },
+    set: function(val) {
+      if (!val.x || !val.y) {
+        throw new Error("Invalid location");
+      }
+      defaultLocation = val;
+    },
+  });
+}
+
+const myAnotherCircle = new Circle(1);
+
+console.log(myAnotherCircle.defaultLocation); // { x: 1, y: 1 }
+
+myAnotherCircle.defaultLocation =1; // Throws error
+
+console.log(myAnotherCircle.defaultLocation); // Doesn't execute
+  ```
+  <p align="center">
+    <img width="446" alt="Screen Shot 2021-07-13 at 9 16 09 PM" src="https://user-images.githubusercontent.com/31994778/125504280-89627e23-fcf0-49cc-8a20-02523d24ced9.png">
+  </p>
+  
+  ---
+  
+  <div id="stopwatch">
+  <h2>Making a Small Stopwatch App</h2>
+  </div>
+  
+  Let's make a small stopwatch application that has `start`, `stop` functions.
+  
+  ```js
+  function Stopwatch() {
+  let time = 0;
+  let endTime = 0;
+  let timeElapsed = 0;
+  let startFlag = false;
+  let stopFlag = false;
+
+  this.start = function() {
+    if (startFlag) {
+      throw new Error("Stopwatch already started");
+    }
+    time = performance.now();
+    startFlag = true;
+    stopFlag = false;
+  };
+
+  this.stop = function() {
+    if (stopFlag) {
+      throw new Error("Stopwatch is not started");
+    }
+    endTime = performance.now();
+    stopFlag = true;
+    startFlag = false;
+    timeElapsed = endTime - time;
+  };
+
+  Object.defineProperty(this, "duration", {
+    get: function() {
+      console.log(`Time elapsed: ${timeElapsed / 1000}s`);
+    },
+  });
+}
+  ```
+  
+  Here, the end user cannot tinker with `time`, `endTime`, `timeElapsed`, `startFlag`, `stopFlag` properties. This is very important because only `start()` and `stop()` methods should be changing them.
+  
+  As a result, we have:
+  
+  <p align="center">
+    <img width="443" alt="Screen Shot 2021-07-14 at 7 38 11 AM" src="https://user-images.githubusercontent.com/31994778/125562069-f403ce18-24a9-40de-ac24-d6ab353fa8a1.png">
+    <h1 align="center">🥳</h1>
+  </p>
+  
