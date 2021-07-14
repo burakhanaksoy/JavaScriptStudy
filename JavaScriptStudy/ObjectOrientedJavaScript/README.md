@@ -496,8 +496,8 @@ console.log(myAnotherCircle.defaultLocation); // Doesn't execute
   ```js
   function Stopwatch() {
   let time = 0;
-  let endTime = 0;
-  let timeElapsed = 0;
+  let stopTime = 0;
+  let currentDifference = 0;
   let startFlag = false;
   let stopFlag = false;
 
@@ -514,15 +514,23 @@ console.log(myAnotherCircle.defaultLocation); // Doesn't execute
     if (stopFlag) {
       throw new Error("Stopwatch is not started");
     }
-    endTime = performance.now();
+    stopTime = performance.now();
+    currentDifference += stopTime - time;
     stopFlag = true;
     startFlag = false;
-    timeElapsed = endTime - time;
+  };
+
+  this.reset = function() {
+    time = 0;
+    stopTime = 0;
+    currentDifference = 0;
+    stopFlag = true;
+    startFlag = false;
   };
 
   Object.defineProperty(this, "duration", {
     get: function() {
-      console.log(`Time elapsed: ${timeElapsed / 1000}s`);
+      console.log(`Time elapsed: ${currentDifference / 1000}s`);
     },
   });
 }
@@ -533,7 +541,7 @@ console.log(myAnotherCircle.defaultLocation); // Doesn't execute
   As a result, we have:
   
   <p align="center">
-    <img width="443" alt="Screen Shot 2021-07-14 at 7 38 11 AM" src="https://user-images.githubusercontent.com/31994778/125562069-f403ce18-24a9-40de-ac24-d6ab353fa8a1.png">
+    <img width="445" alt="Screen Shot 2021-07-14 at 8 10 18 AM" src="https://user-images.githubusercontent.com/31994778/125564912-38efac34-bd27-47ec-a589-ba5a365ab745.png">
     <h1 align="center">🥳</h1>
   </p>
   
