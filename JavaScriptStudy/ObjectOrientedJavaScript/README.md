@@ -614,6 +614,103 @@ Note: `Every object has a prototype`.
   
   Now, let's create an admin user.
   
-  Admin user should have the same properties tht a `User` has and it must have some additional ones. For example, an admin user must have a `deleteUser` method to delete whomever they want.
+  Admin user should have the same properties that a `User` has and it must have some additional ones. For example, an admin user must have a `deleteUser` method to delete whomever they want. Of course, this method should only be specific to an admin user.
   
+  Now, we are going to add the following code snippet to the previous one.
   
+  ```js
+  function Admin(...args) {
+  User.apply(this, args);
+}
+```
+
+This snippet does one thing: <b>Apply User(...args) function to `this` object, which is `Admin`.</b> This is the way to create an Admin object that uses `User()` constructor.
+
+Then,
+
+```js
+Admin.prototype = Object.create(User.prototype);
+```
+
+With this code snippet, we aim to create a `__proto__` for Admin and set it to User.prototype.
+
+`Note:` <b> By using Object.create(), we do not set User.prototype as Admin object's immediate prototype! Object.create() only adds a prototype in the prototype chain. `Immediate prototype is set through the following snippet.`</b>
+
+```js
+Admin.prototype = {
+  prop: 'value'
+}
+```
+
+Anyway, now we have the following total code snippet:
+
+```js
+function User(email, name) {
+  this.email = email;
+  this.name = name;
+  this.online = false;
+}
+
+User.prototype = {
+  login: function() {
+    console.log(`${this.email} has logged in.`);
+  },
+  logout: function() {
+    console.log(`${this.email} has logged out.`);
+  },
+};
+
+function Admin(...args) {
+  User.apply(this, args);
+}
+
+Admin.prototype = Object.create(User.prototype);
+```
+
+However, one thing is missing! `deleteUser` method for Admin object. For this, we should create a prototype that has `deleteUser` method.
+
+```js
+Admin.prototype.deleteUser = function(user) {
+  userArray = userArray.filter((u) => user.email != u.email);
+};
+
+Admin.prototype.showUsers = function() {
+  console.log(userArray);
+};
+```
+
+Here, we added both `deleteUser` and `showUsers` method to Admin object.
+
+<p align="center">
+  <img width="440" alt="Screen Shot 2021-07-15 at 10 59 34 AM" src="https://user-images.githubusercontent.com/31994778/125751620-0441b1d6-b86f-489f-ab25-2ab035d1b4da.png">
+  </p>
+  
+  <p align="center">
+    We can see that users can be deleted successfully
+  </p>
+  
+  <p align="center">
+  <img width="446" alt="Screen Shot 2021-07-15 at 11 02 06 AM" src="https://user-images.githubusercontent.com/31994778/125751884-96119f6b-18e3-466d-81f6-2211dda2b912.png">
+  </p>
+  
+  <p align="center">
+    We can see that non admin users cannot use `deleteUser` and `showUsers` methods.
+  </p>
+
+  <h3>Taking a closer look at Admin Object</h3>
+  
+  Opening the dev tools and examining what Admin Object has under the hood.. We see that
+  
+  <p align="center">
+  <img width="444" alt="Screen Shot 2021-07-15 at 11 04 38 AM" src="https://user-images.githubusercontent.com/31994778/125752380-9387b2b8-14bc-428e-a428-28034504cec1.png">
+  </p>
+  
+  Here, it's important to see that Admin Object has `deleteUser` and `showUsers` as its immediate prototype. This prototype is not added to User Object and this is the main reason why non-Admin Objects can't use these methods.
+  
+  Also, It's succeeding prototype has `login` and `logout` methods. These are the methods that are inherited from User.prototype through `Admin.prototype = Object.create(User.prototype)`.
+  
+  Lastly, like every other Object, Admin Object has Object.prototype as it's latest prototype which has the commong methods for every JS Object, such as `hasOwnProperty`.
+  
+  <h3>Prototype Chain of Admin Object</h3>
+  
+  `Admin -> Admin.prototype -> User.prototype -> Object.prototype -> null`
