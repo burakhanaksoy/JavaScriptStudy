@@ -113,6 +113,10 @@ Of course, we can tell they refer to different objects using `is`, but let's imp
 
 Awesome ツ
 
+<p align="center">
+<img width="550" src="https://user-images.githubusercontent.com/31994778/130010937-8fd2346a-ddc3-4cef-9a1a-f73d7ac14010.jpeg">
+</p>
+
 ---
 
 <h3>Combination</h3>
