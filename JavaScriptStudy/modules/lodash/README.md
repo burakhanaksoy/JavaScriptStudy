@@ -184,3 +184,52 @@ As we can see, `'Some Text'` didn't change as it was deep copied, however, `favo
 
 In order to refrain from such situation, we can use lodash's cloneDeep.
 
+```js
+var cloneDeep = require("lodash.clonedeep");
+
+let originalList = [
+  "Some Text",
+  {
+    name: "Burakhan",
+    lastName: "Aksoy",
+    favoriteSong: {
+      name: "Hung Up",
+      artist: "Madonna",
+      year: 2005,
+      album: "Confessions on a Dance Floor",
+    },
+  },
+];
+// deep copy with cloneDeep (｡◕‿◕｡)
+let copiedList = cloneDeep(originalList);
+// Changing a nested item, this will reflect on the original list
+copiedList[1].favoriteSong = {
+  name: "Somebody to Love",
+  artist: "Jefferson Airplane",
+  year: 1967,
+  album: "Surrealistic Pillow",
+};
+// Changing a non-nested item, this won't reflect on the original list
+copiedList[0] = "Changed Text";
+
+console.log(originalList);
+```
+
+Prints
+
+```
+[
+  'Some Text',
+  {
+    name: 'Burakhan',
+    lastName: 'Aksoy',
+    favoriteSong: {
+      name: 'Hung Up',
+      artist: 'Madonna',
+      year: 2005,
+      album: 'Confessions on a Dance Floor'
+    }
+  }
+]
+```
+
