@@ -194,6 +194,9 @@ This is very nice in in my opinion with two points :
 
 2- It'd be much easier for fellow developers to understand the code.
 
+<b>Hoisting no longer works with let.</b>
+
+---
 
 
 
