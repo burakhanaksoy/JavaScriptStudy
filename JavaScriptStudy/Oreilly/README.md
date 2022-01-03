@@ -72,7 +72,8 @@ Here, we have `style.css` file to be linked to index.html.
 [Javascript Variables](#variables) 
 [var hoisting](#var-hoisting) 
 [Not Being Able to Redeclare Variables with Let](#cannot-redeclare-let) 
-[Equality vs Strict Equality Operator](#equality-vs-strict) 
+[Equality vs Strict Equality Operator](#equality-vs-strict)
+[Constants](#constants)
 
 <p id="variables">
 <h2>Javascript Variables</h2>
@@ -270,3 +271,9 @@ Also, please check out this topic on [stackoverflow](https://stackoverflow.com/q
 <img width="763" alt="Screen Shot 2022-01-03 at 6 50 08 PM" src="https://user-images.githubusercontent.com/31994778/147951122-ea813da4-70ce-4d0d-ad31-7f2141ad0446.png">
 
 ---
+
+<p id="constants">
+  <h2>Constants</h2>
+  </p>
+  
+  
