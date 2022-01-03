@@ -71,6 +71,8 @@ Here, we have `style.css` file to be linked to index.html.
 ------------ | 
 [Javascript Variables](#variables) 
 [var hoisting](#var-hoisting) 
+[Not Being Able to Redeclare Variables with Let](#cannot-redeclare-let) 
+[Equality vs Strict Equality Operator](#equality-vs-strict) 
 
 <p id="variables">
 <h2>Javascript Variables</h2>
@@ -194,11 +196,77 @@ This is very nice in in my opinion with two points :
 
 2- It'd be much easier for fellow developers to understand the code.
 
-<b>Hoisting no longer works with let.</b>
+<b>Hoisting no longer works with `let` keyword.</b>
 
 ---
 
+<p id="cannot-redeclare-let">
+  <h2>Not Being Able to Redeclare Variables with Let</h2>
+  </p>
 
+This is another important difference between `var` and `let`. When we use `let` keyword for variable declaration, we cannot redaclare the same variable twice, unlike `var`.
 
+For example:
 
+```js
+function printSomething(){
+    let myName = "Burak";
+    console.log(myName);
+    
+    let myName = "Ahmet";
+    console.log(myName);
+}
+```
 
+This will raise error
+
+<img width="562" alt="Screen Shot 2022-01-03 at 5 48 53 PM" src="https://user-images.githubusercontent.com/31994778/147944447-71ac232e-bc70-47dd-9c4c-5672c34ed06d.png">
+
+However, using `var` doesn't print error on, as if it's normal to declare same variable twice.
+
+<img width="558" alt="Screen Shot 2022-01-03 at 5 50 01 PM" src="https://user-images.githubusercontent.com/31994778/147944569-00b52111-7300-4121-a7d5-f90b7943d039.png">
+
+The following is written on [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Variables#a_note_about_var)
+
+>Again, this is a sensible language decision. There is no reason to redeclare variables — it just makes things more confusing.
+>For these reasons and more, we recommend that you use let in your code, rather than var. There is no reason to use var, unless you need to support Internet Explorer 10 or older with your code.
+
+---
+
+<p id="equality-vs-strict">
+  <h2>Equality vs Strict Equality Operator</h2>
+  </p>
+  
+ Both these operators are used for testing equality between two operands. However, the community seem to find `strict-equality` operator to be both faster and more reliable.
+ 
+<b>Case 1: (False positives)</b>
+ 
+ ```js
+let myVar1 = 22;
+let myVar2 = '22';
+
+console.log(myVar1 == myVar2); // prints true
+```
+
+```js
+let myVar1 = 22;
+let myVar2 = '22';
+
+console.log(myVar1 === myVar2); // prints false
+```
+
+Here, as we can see, even if `myVar1` and `myVar2` don't have the same types, i.e., integer and string, `==` returns true and `===` returns false.
+
+Using `===` would be more logical here. Also faster. Faster because `==` does type conversion, where `===` doesn't make this and directly compares.
+
+<b>Case 2: (Performance)</b>
+
+<img width="562" alt="Screen Shot 2022-01-03 at 6 41 56 PM" src="https://user-images.githubusercontent.com/31994778/147950275-43a326a8-4bd7-4ee3-ac1b-94cd23d9bc76.png">
+
+Looking at the above image, we see that `===` is superior to `==` in that the former spends less time doing the evaluation.
+
+Also, please check out this topic on [stackoverflow](https://stackoverflow.com/questions/359494/which-equals-operator-vs-should-be-used-in-javascript-comparisons) and find this answer below
+
+<img width="763" alt="Screen Shot 2022-01-03 at 6 50 08 PM" src="https://user-images.githubusercontent.com/31994778/147951122-ea813da4-70ce-4d0d-ad31-7f2141ad0446.png">
+
+---
