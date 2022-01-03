@@ -74,6 +74,7 @@ Here, we have `style.css` file to be linked to index.html.
 [Not Being Able to Redeclare Variables with Let](#cannot-redeclare-let) 
 [Equality vs Strict Equality Operator](#equality-vs-strict)
 [Constants](#constants)
+[const vs let](#const-vs-let)
 
 <p id="variables">
 <h2>Javascript Variables</h2>
@@ -276,4 +277,54 @@ Also, please check out this topic on [stackoverflow](https://stackoverflow.com/q
   <h2>Constants</h2>
   </p>
   
-  
+constants in Javascript use `const` keyword. Two of the important differences between constants and let is that:
+
+1 - You cannot reassign a constant.
+
+For example:
+
+```js
+const myConst = 12;
+myConst = 11;
+```
+
+This will throw error.
+
+<img width="565" alt="Screen Shot 2022-01-03 at 7 40 59 PM" src="https://user-images.githubusercontent.com/31994778/147956173-9ea0f57b-49ca-43d6-ab34-4654ffdf8f15.png">
+
+2 - Constants should be initialized when they are declared.
+
+```js
+const myConst; // Errors -> Uncaught SyntaxError: Missing initializer in const declaration
+```
+
+<b>Although we cannot reassign a const, we can change it's content, especially if it's an object.</b>
+
+For example:
+
+```js
+const person = {
+    name:"Burakhan",
+    age:26
+}
+console.log(person.name);
+
+person.name = "Ahmet";
+console.log(person.name);
+```
+
+<img width="449" alt="Screen Shot 2022-01-03 at 7 44 53 PM" src="https://user-images.githubusercontent.com/31994778/147956597-c738a505-62c6-4d75-a8cf-7bf7fb9a021e.png">
+
+<b>Declaring variable as constant doesn't mean it cannot be changed, it means that it cannot be reassigned, i.e., it should point to the same object.</b>
+
+---
+
+<p id="const-vs-let">
+<h2>const vs let</h2>
+</p>
+
+Referring to [When to use const and when to use let](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Variables#when_to_use_const_and_when_to_use_let).
+
+<img width="823" alt="Screen Shot 2022-01-03 at 7 55 02 PM" src="https://user-images.githubusercontent.com/31994778/147957631-cfbcf9e1-1958-418e-8cfc-9a56510871ca.png">
+
+
