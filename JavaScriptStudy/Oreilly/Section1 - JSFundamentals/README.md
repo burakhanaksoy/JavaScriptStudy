@@ -8,6 +8,7 @@
 <b>Table Of Contents</b> |
 ------------ | 
 [How to link JS script to HTML file?](#linking-js-to-html) 
+[How to link CSS script to HTML file?](#linking-css-to-html) 
  
  <p id="linking-js-to-html">
  <h2>How to link JS script to HTML file?</h2>
@@ -26,3 +27,16 @@
  
  <img width="738" alt="Screen Shot 2022-01-03 at 10 48 46 AM" src="https://user-images.githubusercontent.com/31994778/147908888-dedb7b22-68a3-4995-b659-fcb48dce5081.png">
  
+---
+
+<p id="linking-css-to-html">
+<h2>How to link CSS script to HTML file?</h2>
+</p>
+
+Linking CSS to html file is pretty much the same as the first part.
+
+Here, we have `style.css` file to be linked to index.html.
+
+<img width="364" alt="Screen Shot 2022-01-03 at 10 59 02 AM" src="https://user-images.githubusercontent.com/31994778/147909403-c29aea7d-f00c-4cef-8eeb-73f4f4a5d0c6.png">
+
+<img width="614" alt="Screen Shot 2022-01-03 at 12 19 24 PM" src="https://user-images.githubusercontent.com/31994778/147915172-d0e49c9d-d842-40df-ab0d-f63ce655310a.png">
