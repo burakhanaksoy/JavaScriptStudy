@@ -8,6 +8,7 @@
 ------------ | 
 [Section-1 JS Fundamentals](#section1) 
 [Section-2 Variables](#section2) 
+[Section-3 DOM](#section3)
   
 </div>
 
@@ -327,4 +328,197 @@ Referring to [When to use const and when to use let](https://developer.mozilla.o
 
 <img width="823" alt="Screen Shot 2022-01-03 at 7 55 02 PM" src="https://user-images.githubusercontent.com/31994778/147957631-cfbcf9e1-1958-418e-8cfc-9a56510871ca.png">
 
+---
+
+<p id="section3">
+  <h1>Section-3 DOM</h1>
+  </p>
+
+<p align="center">
+<img height="400" width="500" src="https://user-images.githubusercontent.com/31994778/148691719-ec5b8625-fffc-441d-882d-1309295bb3fb.jpeg">
+</p>
+
+<b>Table Of Contents</b> |
+------------ | 
+[What is DOM?](#what-is-dom)
+[Document Object](#document-object)
+
+---
+
+<p id="what-is-dom">
+  <h2>What is DOM?</h2>
+  </p>
+  
+  <b><i>DOM stands for "Document Object Model", which simply refers to the structure that a web page's HTML content relies upon.</i></b>
+  
+  For example, for an empty HTML file, we usually have something like this:
+  
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+```
+
+Each part constitutes a part of DOM.
+
+<b>HEAD</b>: Head tag is the place where HTML's metadata is stored. charset, styles, links, fonts, title, etc. are all stored inside <head> tag.
+  
+<b>BODY</b>: Body is the main part of HTML document in which buttons, anchor tags, boxes, and everything that we see on a web page is stored here. <body> is the exact opposite of <head> when it comes to visibility. Content we have under <body> tag is subject to direct interaction with user.
+  
+<b>HTML</b>: <html> tag represents the root of HTML document. It is a container of all other HTML elements. You can reach any HTML element if you can reach #root, i.e., <html>. html element supports global attributes, meaning that when you give a class to <html class="some-class"> like this, 
+  
+  making the following will hide everything in the page.
+  
+  ```html
+  <html class="some-class">
+    <head>
+      ...
+    </head>
+    <body>
+      ...
+    </body>
+  </html>
+  ```
+  
+  ```
+  .some-class{
+  display:none;
+  }
+  ```
+  
+  ---
+  
+  <p id="document-object">
+  <h2>Document Object</h2>
+  </p>
+  
+  <b><i>Document object</i></b>
+  
+  <b><i>In Javascript, `document` is the object form of HTML DOM. Basically, it is the same as DOM.</i></b>
+  
+  <h3>Selecting specific element</h3>
+  
+  For example, we can select any element on the DOM using `document` object.
+  
+  ```html
+  <body>
+    <h1>Burakhan Aksoy</h1>
+    <hr/>
+    <script src="app.js"></script>
+  </body>
+  ```
+  
+  I have something like this, then I will select h1 tag and make it red using js.
+  
+  ```js
+  const myH1 = document.querySelector("h1");
+  myH1.classList.add('active')
+  ```
+  
+  This snippet adds `active` class to `myH1`.
+  
+  active class:
+  
+  ```
+  .active{
+  color:red;
+  }
+  ```
+  
+  <img width="871" alt="Screen Shot 2022-01-09 at 8 04 10 PM" src="https://user-images.githubusercontent.com/31994778/148692583-6f28afdf-0450-464c-9f2a-e603c62c758e.png">
+
+---
+ 
+<h3>Adding to DOM</h3>
+  
+Say that we have base HTML like this:
+ 
+ ```html
+  <body>
+    <h1>Burakhan Aksoy</h1>
+    <hr/>
+    <script src="app.js"></script>
+  </body>
+  ```
+  
+  I am going to add something to it using `document` object.
+  
+  ```js
+  const info = {
+  name: "Burakhan Aksoy",
+  age: 26,
+  job: "python developer",
+  location: "Istanbul",
+};
+
+let listView = '<ul>';
+
+for(key of Object.keys(info)){
+    listView += `<li>${key}:${info[key]}</li>`
+}
+listView += '</ul>'
+
+document.body.innerHTML += listView;
+```
+
+And, voila!
+  
+  <img width="871" alt="Screen Shot 2022-01-09 at 8 21 17 PM" src="https://user-images.githubusercontent.com/31994778/148693142-b558a756-6972-4005-9cd2-f68032142989.png">
+
+---
+  
+<h3>Event Listeners</h3>
+  
+  <b><i>Event listeners are the observer patterns to listen to specific event.</i></b>
+  
+  For example, I'm going to change color of each of the <li> tags on hover.
+  
+  ```js
+  const listItems = document.querySelectorAll("li").forEach((e) => {
+    e.addEventListener("mouseenter", () =>{
+        e.classList.add('active');
+    });
+
+    e.addEventListener("mouseleave", () =>{
+        e.classList.remove('active');
+    });
+});
+  ```
+  
+  Here, I am selecting each and every `<li>` tag using `document.querySelectorAll("li")`. This returns a list of `<li>` tags.
+  
+  Then, I add `mouseenter` and `mouseleave` events using `addEventListener` method.
+  
+  Here is our css classes:
+  
+  ```css
+      .active{
+          color:red;
+      }
+
+      li:hover{
+          cursor:pointer;
+      }
+
+      ul{
+          list-style-type: none
+      }
+
+      li::before{
+          content:"-> ";
+      }
+  ```
+  
+  Finally, we have something like this:
+
+https://user-images.githubusercontent.com/31994778/148693970-b346d952-028f-4058-b6b7-cd43ce423e45.mov
 
