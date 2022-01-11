@@ -1,0 +1,15 @@
+.active{
+    color:red;
+}
+
+li:hover{
+    cursor:pointer;
+}
+
+ul{
+    list-style-type: none
+}
+
+li::before{
+    content:"-> ";
+}
