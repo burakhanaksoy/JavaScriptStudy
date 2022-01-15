@@ -540,6 +540,7 @@ https://user-images.githubusercontent.com/31994778/148693970-b346d952-028f-4058-
 [Array.prototype.sort()](#array-sort)
 [Array.prototype.filter()](#array-filter)
 [Array.prototype.map()](#array-map)
+[Array.prototype.forEach()](#array-for-each)
  
  <p id="array-sort">
  <h2>Array.prototype.sort()</h2>
@@ -704,6 +705,27 @@ console.log(students);
   
   Here, we filtered students having grade >= 80.
   
+  <b>Example 4: (Using callback fnc)</b>
+  
+  ```js
+  const someArr = ["Burak","burak","mahmut","Ahmet", "ahmet", "AHmet"];
+
+  const startingWith = function(letter, word){
+    const letterLower = letter.toLowerCase();
+    const letterUpper = letter.toUpperCase();
+    return word.startsWith(letterLower) || word.startsWith(letterUpper);
+  }
+
+const filteredArr = someArr.filter((e) => startingWith('m', e) )
+
+console.log(filteredArr);
+  ```
+  
+  This outputs:
+  
+  ```
+  [ 'mahmut' ]
+  ```
   ---
   
   <p id="array-map">
@@ -757,3 +779,70 @@ console.log(students);
   ---
   
   
+  <p id="array-for-each">
+ <h2>Array.prototype.forEach()</h2>
+ </p>
+
+  <b><i>"The forEach() method executes a provided function once for each array element."</i></b>
+  
+  The main difference between `forEach()` and `map()` being the former won't produce a new array, and you'll be mutating the original array.
+  
+  <b>Example 1: (traverse and push to two arrays)</b>
+  
+  ```js
+  const students = [
+  {
+    name:"Burak",
+    grade:80
+    
+  },
+  {
+    name:"Sarah",
+    grade:90
+  },
+  {
+    name:"Hulusi",
+    grade:44
+  },
+  {
+    name:"Furkan",
+    grade:66
+  }
+  ];
+  
+let successfulStudents = [];
+let unsuccessfulStudents = [];
+
+students.forEach((e) => {
+  if(e.grade >= 80){
+    successfulStudents.push(e);
+    return;
+  }
+  unsuccessfulStudents.push(e);
+
+});
+```
+  
+Here, we traverse on each element of `students` array and push to either `successfulStudents` or `unsuccessfulStudents` array based on their grades.
+  
+  <b>The same thing could've been done with `for ... of`</b>
+  
+ ```js
+  for(const e of students){
+  if(e.grade >=80){
+    successfulStudents.push(e);
+    continue;
+  }
+  unsuccessfulStudents.push(e);
+}
+ ```
+  
+ <b>Performance-wise `for...of` seems to be faster than `forEach()`.<b>
+ 
+ For this operation, 
+   
+ <img width="166" alt="Screen Shot 2022-01-15 at 11 49 38 AM" src="https://user-images.githubusercontent.com/31994778/149615904-5eacac72-287e-4b2e-943d-fd1bb5b0e977.png">
+
+ <img width="177" alt="Screen Shot 2022-01-15 at 11 49 16 AM" src="https://user-images.githubusercontent.com/31994778/149615902-13e72624-eafc-48db-8167-4f7448678029.png">
+
+   
