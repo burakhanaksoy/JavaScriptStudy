@@ -916,6 +916,7 @@ In this project, I studied:
   
   - Tracking time of different countries with `moment.utc()`.
   - CSS to provide UI with slick look.
+  - Using `addEventListener()` method to change classes of cards with `mouseenter` and `mouseleave` events.
   
 ---
   
