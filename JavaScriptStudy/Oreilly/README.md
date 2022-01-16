@@ -10,6 +10,7 @@
 [Section-2 Variables](#section2) 
 [Section-3 DOM](#section3)
 [Section-4 Array Operations](#section4)
+[Section-5 Dates](#section5)
   
 </div>
 
@@ -845,4 +846,48 @@ Here, we traverse on each element of `students` array and push to either `succes
 
  <img width="177" alt="Screen Shot 2022-01-15 at 11 49 16 AM" src="https://user-images.githubusercontent.com/31994778/149615902-13e72624-eafc-48db-8167-4f7448678029.png">
 
+<b>Example 2: (Traversing with element, index values)</b> 
    
+<b>This is very similar to Python's enumerate</b>
+
+```py
+>>> students = [{"name":"Burak", "grade":80}, {"name":"Sarah", "grade":90}, {"name":"Hulusi", "grade":44}]
+>>> 
+>>> for idx, student in enumerate(students):
+...     print(idx, student)
+... 
+0 {'name': 'Burak', 'grade': 80}
+1 {'name': 'Sarah', 'grade': 90}
+2 {'name': 'Hulusi', 'grade': 44}
+```
+   
+The same can be done in JS as:
+   
+<img width="562" alt="Screen Shot 2022-01-15 at 12 47 12 PM" src="https://user-images.githubusercontent.com/31994778/149617446-26b102ee-a552-4bea-a3a4-09abac3bb40e.png">
+   
+or using `for...of`
+
+<img width="560" alt="Screen Shot 2022-01-15 at 12 48 58 PM" src="https://user-images.githubusercontent.com/31994778/149617505-31ccc3ff-70c7-49ad-8ef6-16bf6ab576b3.png">
+   
+   
+---
+   
+<p id="section5">
+<h1>Section-5 Dates</h1>
+</p>
+
+<p align="center">
+  
+<img src="https://user-images.githubusercontent.com/31994778/149619985-1c8e9678-18d8-40d2-b194-abe693c52f77.png">
+  
+</p>
+
+<b>Table Of Contents</b> |
+------------ | 
+[Introduction](#introduction)
+ 
+ <p id="introduction">
+ <h2>Introduction</h2>
+ </p>
+
+  
