@@ -884,10 +884,39 @@ or using `for...of`
 
 <b>Table Of Contents</b> |
 ------------ | 
-[Introduction](#introduction)
+[Projects](#projects)
  
- <p id="introduction">
- <h2>Introduction</h2>
+ <p id="projects">
+ <h2>Projects</h2>
  </p>
 
+  <b><i>"Dates and times are very important in each programming language. We have `datetime` module in Python, and `moment` library in Javascript."</i></b>
+  
+  Here, I made two small projects for the sake of studying dates and `moment.js`.
+  
+  <h2>First Project: Formatting Date and Manipulate DOM</h2>
+  
+  <b>Video:</b>
+
+https://user-images.githubusercontent.com/31994778/149664056-f3ac29f6-a876-4156-9faf-603577ad5537.mov
+  
+  In this project, I studied: 
+  
+  - ways to format a `moment` object
+  - adding and subtracting date to/from another date.
+  - Use Javascript's `setInterval()` method to change time displayed in the UI.
+
+<h2>Second Project: Different Countries' Time</h2>
+  
+  <b>Video:</b>
+
+https://user-images.githubusercontent.com/31994778/149664160-9a9282a5-d785-4c42-b1aa-78765a19cd9d.mov
+
+In this project, I studied: 
+  
+  - Tracking time of different countries with `moment.utc()`.
+  - CSS to provide UI with slick look.
+  
+---
+  
   
