@@ -86,14 +86,9 @@
         americanTimeText.innerHTML = americanTime.format(format);
       });
 
-      const countryTime = document.getElementsByClassName("time-bg");
-      //   console.log(countryTime);
+      const countryTimeBg = document.getElementsByClassName("time-bg");
 
-      //   countryTime.forEach((e) => {
-      //     console.log(e);
-      //   });
-
-      for (let e of countryTime) {
+      for (let e of countryTimeBg) {
         e.addEventListener("mouseenter", () => {
           e.classList.add("active");
         });
@@ -102,11 +97,6 @@
           e.classList.remove("active");
         });
       }
-      //   countryTime.forEach((e) => {
-      //     e.addEventListener("mouseenter", () => {
-      //       console.log(e);
-      //     });
-      //   });
     </script>
   </body>
 </html>

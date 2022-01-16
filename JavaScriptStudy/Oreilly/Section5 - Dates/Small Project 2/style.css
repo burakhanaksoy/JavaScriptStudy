@@ -1,5 +1,4 @@
 .container {
-  /* border: 1px solid; */
   margin-top: 5%;
 }
 
@@ -50,26 +49,3 @@ p {
   height: 100%;
   width: 100%;
 }
-/* .china-bg {
-  position: absolute;
-  opacity: 0.1;
-  border-radius: 50px;
-  width: 100%;
-  height: 100%;
-}
-
-.usa-bg {
-  position: absolute;
-  opacity: 0.1;
-  border-radius: 50px;
-  width: 100%;
-  height: 100%;
-} */
-/* .country-time:before{
-    content: ' ';
-    opacity: 0.6;
-    background-image: url('./img/turkey-flag-png-xl.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
