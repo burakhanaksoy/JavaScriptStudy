@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dates</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="../moment.js"></script>
+    <script>
+      const state = {
+        today: moment(),
+        addTwoDays: moment().add(2, "days"),
+        subtractFiveHours: moment().subtract(5, "hours"),
+      };
+      const format1 = "YYYY-MM-DD HH:mm:ss";
+      const format2 = "YYYY-MM-DD";
+      const headerToday = document.createElement("h1");
+      //   const addTwoDays = moment().add(2, "days");
+      let hrElement = document.createElement("hr");
+
+      //   h1 today
+      headerToday.setAttribute("id", "today-date");
+      headerToday.innerHTML += `Turkish Time -> ${state.today.format(
+        "HH:mm:ss - LL"
+      )}`;
+      document.body.appendChild(headerToday);
+
+      const format = `<h3>type -> ${typeof state.today}</h3>`;
+      document.body.innerHTML += `${format} <hr/>`;
+
+      //   h3 toString
+      let divTag = document.createElement("div");
+      let header2 = document.createElement("h3");
+      header2.setAttribute("id", "header-to-string");
+      header2.innerHTML = `using 'toString': ${state.today.toString()}`;
+
+      let pTag = document.createElement("p");
+      pTag.innerHTML = `type -> ${typeof state.today.toString()}`;
+      divTag.appendChild(header2);
+      divTag.appendChild(pTag);
+      document.body.appendChild(divTag);
+      hrElement = document.createElement("hr");
+      document.body.appendChild(hrElement);
+
+      //   h3 formatting1
+      divTag = document.createElement("div");
+      header3 = document.createElement("h3");
+      header3.setAttribute("id", "formatting1");
+      header3.innerHTML = `Formatting: ${state.today.format(format1)}`;
+
+      pTag = document.createElement("p");
+      pTag.innerHTML = `type -> ${typeof state.today.toString()}`;
+      divTag.appendChild(header3);
+      divTag.appendChild(pTag);
+      document.body.appendChild(divTag);
+      hrElement = document.createElement("hr");
+      document.body.appendChild(hrElement);
+
+      //   h3 add-two-days
+      divTag = document.createElement("div");
+      header3 = document.createElement("h3");
+      header3.setAttribute("id", "add-two-days");
+      header3.innerHTML = `Adding two days with: 'today.add(2, "days")'`;
+
+      let resultTwoDays = document.createElement("h4");
+      resultTwoDays.setAttribute("id", "result-two-days");
+      resultTwoDays.innerHTML = `Result: ${state.addTwoDays}`;
+
+      pTag = document.createElement("p");
+      pTag.innerHTML = `type -> ${typeof state.addTwoDays}`;
+      divTag.appendChild(header3);
+      divTag.appendChild(resultTwoDays);
+      divTag.appendChild(pTag);
+      document.body.appendChild(divTag);
+      hrElement = document.createElement("hr");
+      document.body.appendChild(hrElement);
+
+      // h3 subtract-five-hours
+
+      divTag = document.createElement("div");
+      header3 = document.createElement("h3");
+      header3.setAttribute("id", "subtract-five-hours");
+      header3.innerHTML = `Subtracting five hours with: 'today.subtract(5, "hours")'`;
+
+      let resultFiveHours = document.createElement("h4");
+      resultFiveHours.setAttribute("id", "result-five-hours");
+      resultFiveHours.innerHTML = `Result: ${state.subtractFiveHours}`;
+
+      pTag = document.createElement("p");
+      pTag.innerHTML = `type -> ${typeof state.subtractFiveHours}`;
+      divTag.appendChild(header3);
+      divTag.appendChild(resultFiveHours);
+      divTag.appendChild(pTag);
+      document.body.appendChild(divTag);
+      hrElement = document.createElement("hr");
+      document.body.appendChild(hrElement);
+
+      const render = function() {
+        const headerToday = document.getElementById("today-date");
+        headerToday.innerHTML = `Turkish Time -> ${state.today.format(
+          "HH:mm:ss - LL"
+        )}`;
+
+        header2 = document.getElementById("header-to-string");
+        header2.innerHTML = `using 'toString': ${state.today.toString()}`;
+
+        header3 = document.getElementById("formatting1");
+        header3.innerHTML = `Formatting: ${state.today.format(format1)}`;
+
+        resultTwoDays = document.getElementById("result-two-days");
+        resultTwoDays.innerHTML = `Result: ${state.addTwoDays}`;
+
+        resultFiveHours = document.getElementById("result-five-hours");
+        resultFiveHours.innerHTML = `Result: ${state.subtractFiveHours}`;
+      };
+
+      setInterval(() => {
+        state.today = moment();
+        state.addTwoDays = moment().add(2, "days");
+        (state.subtractFiveHours = moment().subtract(5, "hours")), render();
+      }, 1000);
+    </script>
+  </body>
+</html>

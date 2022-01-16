@@ -1,0 +1,75 @@
+.container {
+  /* border: 1px solid; */
+  margin-top: 5%;
+}
+
+p {
+  font-size: large;
+}
+.flag-img {
+  border-radius: 50%;
+  width: 52px;
+  height: 75px;
+}
+
+.country-time {
+  border: 2px solid gray;
+  border-radius: 50px;
+  width: 30%;
+  height: 120px;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-evenly;
+}
+
+#turkish-time {
+  position: relative;
+}
+#china-time {
+  position: relative;
+}
+#us-time {
+  position: relative;
+}
+
+.time-bg {
+  opacity: 0.1;
+  border-radius: 48px;
+  width: 100%;
+  height: 100%;
+}
+
+.active {
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.anchor-class {
+  display: inline;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+/* .china-bg {
+  position: absolute;
+  opacity: 0.1;
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+}
+
+.usa-bg {
+  position: absolute;
+  opacity: 0.1;
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+} */
+/* .country-time:before{
+    content: ' ';
+    opacity: 0.6;
+    background-image: url('./img/turkey-flag-png-xl.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
