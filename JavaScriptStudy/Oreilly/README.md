@@ -9,6 +9,7 @@
 [Section-1 JS Fundamentals](#section1) 
 [Section-2 Variables](#section2) 
 [Section-3 DOM](#section3)
+[Section-4 Array Operations](#section4)
   
 </div>
 
@@ -522,3 +523,326 @@ And, voila!
 
 https://user-images.githubusercontent.com/31994778/148693970-b346d952-028f-4058-b6b7-cd43ce423e45.mov
 
+---
+  
+<p id="section4">
+<h1>Section-4 Array Operations</h1>
+</p>
+
+<p align="center">
+  
+ <img width="316" alt="Screen Shot 2022-01-11 at 9 17 37 AM" src="https://user-images.githubusercontent.com/31994778/148891221-503bb326-94ba-4224-b280-82a1d238812f.png">
+  
+</p>
+
+<b>Table Of Contents</b> |
+------------ | 
+[Array.prototype.sort()](#array-sort)
+[Array.prototype.filter()](#array-filter)
+[Array.prototype.map()](#array-map)
+[Array.prototype.forEach()](#array-for-each)
+ 
+ <p id="array-sort">
+ <h2>Array.prototype.sort()</h2>
+ </p>
+  
+  <b><i>"The sort() method sorts elements of an array "in-place"."</i></b>[ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+  
+  <b>Example 1:(int array)</b>
+  
+  <img width="335" alt="Screen Shot 2022-01-11 at 7 34 42 PM" src="https://user-images.githubusercontent.com/31994778/148983264-e91240e8-52ab-47b6-9c99-af8686b8436b.png">
+  
+  Here, we can see the `in-place` sorting, meaning that the original array is mutated.
+  
+  To preserve the original state of the array, we can declare a new variable and copy `myArr`'s contents and sort.
+  
+ ```js
+let myArr = [3, 1, 2, -1, 11];
+let tempArr = [...myArr];
+
+console.log('sorted array',tempArr.sort((a,b) => (a > b ? 1 : -1)));
+console.log('temp Array', tempArr);
+console.log('original array', myArr)
+ ```
+  
+  Here, we see that `tempArr` is mutated and `myArr` preserves the original form.
+  
+  <img width="342" alt="Screen Shot 2022-01-11 at 7 40 00 PM" src="https://user-images.githubusercontent.com/31994778/148984072-81f82f29-dc74-4f71-8eb8-d404da9a4859.png">
+
+  <b>Example 2: (array of objects)</b>
+  
+  Just like we sort integers, strings, we can also sort an array of objects. Say that we have this array:
+  
+  ```js
+  someArr = [
+  {
+      "name":"burak",
+      "age":26
+  },
+  {
+      "name":"mahmut",
+      "age":22
+  },
+  {
+      "name":"ahmet",
+      "age":21
+  }
+];
+```
+
+Say that we want to sort this array by `age` fields.
+  
+```js
+let tempArr = [...someArr];
+
+console.log('sorted array',tempArr.sort((a,b) => (a.age > b.age ? 1 : -1)));
+console.log('original array', someArr)
+```
+  
+  <img width="322" alt="Screen Shot 2022-01-11 at 7 43 59 PM" src="https://user-images.githubusercontent.com/31994778/148984755-a0028e23-4cdd-49af-ad91-134c7fcc98e1.png">
+  
+ <b>Example 3: (array of strings)</b>
+  
+  Say that we have an array like this:
+  
+  ```js
+someArr = ["Burak","burak","mahmut","Ahmet", "ahmet"];
+console.log(someArr.sort((a,b)=>(a>b ? 1 : -1)));
+```
+ 
+  ```
+  Output:
+
+[ 'Ahmet', 'Burak', 'ahmet', 'burak', 'mahmut' ]
+ ```
+ 
+  As we see here, lexicographical sorting gives precedence to uppercase letters.
+  
+---
+  
+ <p id="array-filter">
+ <h2>Array.prototype.filter()</h2>
+ </p> 
+  
+  <b><i>"filter() method creates a new array with the elements of the original array that passes a certain condition."</i></b>[ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+  
+ <b>Example 1: (array of strings)</b>
+  
+  Let's say that we want to filter elements starting with letter `a` or `A`.
+  
+```js
+someArr = ["Burak","burak","mahmut","Ahmet", "ahmet", "AHmet"];
+
+console.log(someArr.filter((e) => (e.startsWith('a') || e.startsWith('A'))));
+console.log(someArr);
+```
+  
+This outputs:
+
+```
+[ 'Ahmet', 'ahmet', 'AHmet' ]
+[ 'Burak', 'burak', 'mahmut', 'Ahmet', 'ahmet', 'AHmet' ]
+```
+  
+Also, we see that the original array is not changed.
+
+ <b>Example 2: (Sorting the filtered list)</b>
+  
+```js
+someArr = ["Burak","burak","mahmut","Ahmet", "ahmet", "AHmet"];
+
+console.log(someArr.filter((e) => (e.startsWith('a') || e.startsWith('A'))).sort((a, b) => (a > b ? 1 : -1)));
+console.log(someArr);
+```
+  
+This outputs:
+  
+```
+[ 'AHmet', 'Ahmet', 'ahmet' ]
+[ 'Burak', 'burak', 'mahmut', 'Ahmet', 'ahmet', 'AHmet' ]
+```
+  
+Here, we sorted a filtered array.
+  
+<b>Example 3: (array of objects)</b>
+  
+  ```js
+  students = [
+  {
+    name:"Burak",
+    grade:80
+    
+  },
+  {
+    name:"Sarah",
+    grade:90
+  },
+  {
+    name:"Hulusi",
+    grade:44
+  },
+  {
+    name:"Furkan",
+    grade:66
+  }
+  ];
+
+console.log(students.filter((e) => (e.grade >= 80)));
+console.log(students);
+  ```
+  
+  This outputs:
+  
+  ```
+  [ { name: 'Burak', grade: 80 }, { name: 'Sarah', grade: 90 } ]
+[
+  { name: 'Burak', grade: 80 },
+  { name: 'Sarah', grade: 90 },
+  { name: 'Hulusi', grade: 44 },
+  { name: 'Furkan', grade: 66 }
+]
+ ```
+  
+  Here, we filtered students having grade >= 80.
+  
+  <b>Example 4: (Using callback fnc)</b>
+  
+  ```js
+  const someArr = ["Burak","burak","mahmut","Ahmet", "ahmet", "AHmet"];
+
+  const startingWith = function(letter, word){
+    const letterLower = letter.toLowerCase();
+    const letterUpper = letter.toUpperCase();
+    return word.startsWith(letterLower) || word.startsWith(letterUpper);
+  }
+
+const filteredArr = someArr.filter((e) => startingWith('m', e) )
+
+console.log(filteredArr);
+  ```
+  
+  This outputs:
+  
+  ```
+  [ 'mahmut' ]
+  ```
+  ---
+  
+  <p id="array-map">
+ <h2>Array.prototype.map()</h2>
+ </p>
+  
+  <b><i>"map() method returns a new array by applying a function to each element of the original array."</i></b>[ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+  
+  <b>Example 1: (array of objects)</b>
+  
+  Say that we have students array as follows:
+  
+  ```js
+  students = [
+  {
+    name:"Burak",
+    grade:80
+    
+  },
+  {
+    name:"Sarah",
+    grade:90
+  },
+  {
+    name:"Hulusi",
+    grade:44
+  },
+  {
+    name:"Furkan",
+    grade:66
+  }
+  ];
+  
+  newArr = students.map((e)=>({...e, grade:e.grade/2}));
+  console.log(newArr);
+  console.log(students);
+  ```
+  
+  This outputs:
+  
+  <img width="322" alt="Screen Shot 2022-01-11 at 9 16 59 PM" src="https://user-images.githubusercontent.com/31994778/148998883-ce9b5844-36b1-4039-a386-642f2917f4b6.png">
+  
+  Here, we see that `map()` method processed each element so that grade is halved.
+  
+  <b>Note that original array, i.e., `students`, stays the same.</b>
+  
+  <b>Caveats on `map()`</b>
+  
+  <img width="760" alt="Screen Shot 2022-01-11 at 9 27 28 PM" src="https://user-images.githubusercontent.com/31994778/149000350-6082f42b-0760-4e06-aece-fbdfad545f48.png">
+
+  ---
+  
+  
+  <p id="array-for-each">
+ <h2>Array.prototype.forEach()</h2>
+ </p>
+
+  <b><i>"The forEach() method executes a provided function once for each array element."</i></b>
+  
+  The main difference between `forEach()` and `map()` being the former won't produce a new array, and you'll be mutating the original array.
+  
+  <b>Example 1: (traverse and push to two arrays)</b>
+  
+  ```js
+  const students = [
+  {
+    name:"Burak",
+    grade:80
+    
+  },
+  {
+    name:"Sarah",
+    grade:90
+  },
+  {
+    name:"Hulusi",
+    grade:44
+  },
+  {
+    name:"Furkan",
+    grade:66
+  }
+  ];
+  
+let successfulStudents = [];
+let unsuccessfulStudents = [];
+
+students.forEach((e) => {
+  if(e.grade >= 80){
+    successfulStudents.push(e);
+    return;
+  }
+  unsuccessfulStudents.push(e);
+
+});
+```
+  
+Here, we traverse on each element of `students` array and push to either `successfulStudents` or `unsuccessfulStudents` array based on their grades.
+  
+  <b>The same thing could've been done with `for ... of`</b>
+  
+ ```js
+  for(const e of students){
+  if(e.grade >=80){
+    successfulStudents.push(e);
+    continue;
+  }
+  unsuccessfulStudents.push(e);
+}
+ ```
+  
+ <b>Performance-wise `for...of` seems to be faster than `forEach()`.<b>
+ 
+ For this operation, 
+   
+ <img width="166" alt="Screen Shot 2022-01-15 at 11 49 38 AM" src="https://user-images.githubusercontent.com/31994778/149615904-5eacac72-287e-4b2e-943d-fd1bb5b0e977.png">
+
+ <img width="177" alt="Screen Shot 2022-01-15 at 11 49 16 AM" src="https://user-images.githubusercontent.com/31994778/149615902-13e72624-eafc-48db-8167-4f7448678029.png">
+
+   
