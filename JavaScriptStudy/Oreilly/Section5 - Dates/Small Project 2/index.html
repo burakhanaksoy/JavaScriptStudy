@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country Dates</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <center>
+      <div class="container">
+        <div class="country-time" id="turkish-time">
+          <img class="flag-img" src="./img/turkey-flag-png-xl.png" />
+          <a href="https://en.wikipedia.org/wiki/Turkey" class="anchor-class">
+            <img class="time-bg" src="./img/turkey-flag-png-xl.png" />
+          </a>
+          <div>
+            <p>
+              Time in Turkey
+            </p>
+            <p id="turkish-time-paragraph"></p>
+          </div>
+        </div>
+        <div class="country-time" id="china-time">
+          <img class="flag-img" src="./img/Flag-China.jpeg" />
+          <a href="https://en.wikipedia.org/wiki/China" class="anchor-class">
+            <img class="time-bg" src="./img/Flag-China.jpeg" />
+          </a>
+          <div>
+            <p>
+              Time in China
+            </p>
+            <p id="chinese-time-paragraph"></p>
+          </div>
+        </div>
+        <div class="country-time" id="us-time">
+          <img
+            class="flag-img"
+            src="./img/Flag-United-States-of-America.jpeg"
+          />
+          <a
+            href="https://en.wikipedia.org/wiki/United_States"
+            class="anchor-class"
+          >
+            <img
+              class="time-bg"
+              src="./img/Flag-United-States-of-America.jpeg"
+            />
+          </a>
+          <div>
+            <p>
+              Time in USA (California)
+            </p>
+            <p class="time-in-paragraph" id="usa-time-paragraph"></p>
+          </div>
+        </div>
+      </div>
+    </center>
+    <script src="../moment.js"></script>
+    <script>
+      const pElements = document.getElementsByTagName("p");
+      setInterval(() => {
+        const format = "LL HH:mm:ss";
+        const turkishTime = moment()
+          .utc()
+          .add(3, "hours");
+        const chineseTime = moment()
+          .utc()
+          .add(8, "hours");
+        const americanTime = moment()
+          .utc()
+          .subtract(8, "hours");
+
+        const turkishTimeText = document.getElementById(
+          "turkish-time-paragraph"
+        );
+        turkishTimeText.innerHTML = turkishTime.format(format);
+
+        const chineseTimeText = document.getElementById(
+          "chinese-time-paragraph"
+        );
+        chineseTimeText.innerHTML = chineseTime.format(format);
+
+        const americanTimeText = document.getElementById("usa-time-paragraph");
+        americanTimeText.innerHTML = americanTime.format(format);
+      });
+
+      const countryTimeBg = document.getElementsByClassName("time-bg");
+
+      for (let e of countryTimeBg) {
+        e.addEventListener("mouseenter", () => {
+          e.classList.add("active");
+        });
+
+        e.addEventListener("mouseleave", () => {
+          e.classList.remove("active");
+        });
+      }
+    </script>
+  </body>
+</html>

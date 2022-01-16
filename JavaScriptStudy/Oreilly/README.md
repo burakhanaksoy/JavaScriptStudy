@@ -10,6 +10,7 @@
 [Section-2 Variables](#section2) 
 [Section-3 DOM](#section3)
 [Section-4 Array Operations](#section4)
+[Section-5 Dates](#section5)
   
 </div>
 
@@ -540,6 +541,7 @@ https://user-images.githubusercontent.com/31994778/148693970-b346d952-028f-4058-
 [Array.prototype.sort()](#array-sort)
 [Array.prototype.filter()](#array-filter)
 [Array.prototype.map()](#array-map)
+[Array.prototype.forEach()](#array-for-each)
  
  <p id="array-sort">
  <h2>Array.prototype.sort()</h2>
@@ -704,6 +706,27 @@ console.log(students);
   
   Here, we filtered students having grade >= 80.
   
+  <b>Example 4: (Using callback fnc)</b>
+  
+  ```js
+  const someArr = ["Burak","burak","mahmut","Ahmet", "ahmet", "AHmet"];
+
+  const startingWith = function(letter, word){
+    const letterLower = letter.toLowerCase();
+    const letterUpper = letter.toUpperCase();
+    return word.startsWith(letterLower) || word.startsWith(letterUpper);
+  }
+
+const filteredArr = someArr.filter((e) => startingWith('m', e) )
+
+console.log(filteredArr);
+  ```
+  
+  This outputs:
+  
+  ```
+  [ 'mahmut' ]
+  ```
   ---
   
   <p id="array-map">
@@ -755,5 +778,146 @@ console.log(students);
   <img width="760" alt="Screen Shot 2022-01-11 at 9 27 28 PM" src="https://user-images.githubusercontent.com/31994778/149000350-6082f42b-0760-4e06-aece-fbdfad545f48.png">
 
   ---
+  
+  
+  <p id="array-for-each">
+ <h2>Array.prototype.forEach()</h2>
+ </p>
+
+  <b><i>"The forEach() method executes a provided function once for each array element."</i></b>
+  
+  The main difference between `forEach()` and `map()` being the former won't produce a new array, and you'll be mutating the original array.
+  
+  <b>Example 1: (traverse and push to two arrays)</b>
+  
+  ```js
+  const students = [
+  {
+    name:"Burak",
+    grade:80
+    
+  },
+  {
+    name:"Sarah",
+    grade:90
+  },
+  {
+    name:"Hulusi",
+    grade:44
+  },
+  {
+    name:"Furkan",
+    grade:66
+  }
+  ];
+  
+let successfulStudents = [];
+let unsuccessfulStudents = [];
+
+students.forEach((e) => {
+  if(e.grade >= 80){
+    successfulStudents.push(e);
+    return;
+  }
+  unsuccessfulStudents.push(e);
+
+});
+```
+  
+Here, we traverse on each element of `students` array and push to either `successfulStudents` or `unsuccessfulStudents` array based on their grades.
+  
+  <b>The same thing could've been done with `for ... of`</b>
+  
+ ```js
+  for(const e of students){
+  if(e.grade >=80){
+    successfulStudents.push(e);
+    continue;
+  }
+  unsuccessfulStudents.push(e);
+}
+ ```
+  
+ <b>Performance-wise `for...of` seems to be faster than `forEach()`.<b>
+ 
+ For this operation, 
+   
+ <img width="166" alt="Screen Shot 2022-01-15 at 11 49 38 AM" src="https://user-images.githubusercontent.com/31994778/149615904-5eacac72-287e-4b2e-943d-fd1bb5b0e977.png">
+
+ <img width="177" alt="Screen Shot 2022-01-15 at 11 49 16 AM" src="https://user-images.githubusercontent.com/31994778/149615902-13e72624-eafc-48db-8167-4f7448678029.png">
+
+<b>Example 2: (Traversing with element, index values)</b> 
+   
+<b>This is very similar to Python's enumerate</b>
+
+```py
+>>> students = [{"name":"Burak", "grade":80}, {"name":"Sarah", "grade":90}, {"name":"Hulusi", "grade":44}]
+>>> 
+>>> for idx, student in enumerate(students):
+...     print(idx, student)
+... 
+0 {'name': 'Burak', 'grade': 80}
+1 {'name': 'Sarah', 'grade': 90}
+2 {'name': 'Hulusi', 'grade': 44}
+```
+   
+The same can be done in JS as:
+   
+<img width="562" alt="Screen Shot 2022-01-15 at 12 47 12 PM" src="https://user-images.githubusercontent.com/31994778/149617446-26b102ee-a552-4bea-a3a4-09abac3bb40e.png">
+   
+or using `for...of`
+
+<img width="560" alt="Screen Shot 2022-01-15 at 12 48 58 PM" src="https://user-images.githubusercontent.com/31994778/149617505-31ccc3ff-70c7-49ad-8ef6-16bf6ab576b3.png">
+   
+   
+---
+   
+<p id="section5">
+<h1>Section-5 Dates</h1>
+</p>
+
+<p align="center">
+  
+<img src="https://user-images.githubusercontent.com/31994778/149619985-1c8e9678-18d8-40d2-b194-abe693c52f77.png">
+  
+</p>
+
+<b>Table Of Contents</b> |
+------------ | 
+[Projects](#projects)
+ 
+ <p id="projects">
+ <h2>Projects</h2>
+ </p>
+
+  <b><i>"Dates and times are very important in each programming language. We have `datetime` module in Python, and `moment` library in Javascript."</i></b>
+  
+  Here, I made two small projects for the sake of studying dates and `moment.js`.
+  
+  <h2>First Project: Formatting Date and Manipulate DOM</h2>
+  
+  <b>Video:</b>
+
+https://user-images.githubusercontent.com/31994778/149664056-f3ac29f6-a876-4156-9faf-603577ad5537.mov
+  
+  In this project, I studied: 
+  
+  - ways to format a `moment` object
+  - adding and subtracting date to/from another date.
+  - Use Javascript's `setInterval()` method to change time displayed in the UI.
+
+<h2>Second Project: Different Countries' Time</h2>
+  
+  <b>Video:</b>
+
+https://user-images.githubusercontent.com/31994778/149664160-9a9282a5-d785-4c42-b1aa-78765a19cd9d.mov
+
+In this project, I studied: 
+  
+  - Tracking time of different countries with `moment.utc()`.
+  - CSS to provide UI with slick look.
+  - Using `addEventListener()` method to change classes of cards with `mouseenter` and `mouseleave` events.
+  
+---
   
   
