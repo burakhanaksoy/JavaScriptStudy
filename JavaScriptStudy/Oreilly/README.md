@@ -11,6 +11,7 @@
 [Section-3 DOM](#section3)
 [Section-4 Array Operations](#section4)
 [Section-5 Dates](#section5)
+[Section-6 Form Validator Project](#form-validator)
   
 </div>
 
@@ -920,4 +921,85 @@ In this project, I studied:
   
 ---
   
+<p id="form-validator">
+<h1>Section-6 Form Validator Project</h1>
+</p>
+
+<p align="center">
   
+  <img width="470" alt="Screen Shot 2022-01-22 at 8 32 40 PM" src="https://user-images.githubusercontent.com/31994778/150649285-afcb41fb-0451-42c0-ae5a-e88ca0ed3373.png">
+  
+</p>
+  
+<b>Table Of Contents</b> |
+------------ | 
+[Introduction to Project](#introduction-to-project) 
+[Project Video](#project-video) 
+[Project in the Making](#project-in-the-making) 
+
+ <p id="introduction-to-project">
+ <h2>Introduction to Project</h2>
+ </p>
+ 
+ For some time, I've been meaning to make a small form validator project. My motivation behind this project can be laid out as follows:
+ 
+ - Developing Javascript skills (Manipulating DOM, increase knowledge on `<form>` tag, dynamically changing CSS, Working with event listeners)
+ - Not being dependent on a frontend framework, i.e., Vue, Angular, React and using pre-made components.
+ - Last but not least, using `import` and `export` in JS. Since these are a bit different from Python import, I wanted to learn them for some time.
+
+<p id="project-video">
+ <h2>Project Video</h2>
+ </p>
+
+https://user-images.githubusercontent.com/31994778/150649492-505155b7-3d81-411f-b848-ce700e6d9be2.mov
+
+<p id="project-in-the-making">
+ <h2>Project in the Making</h2>
+ </p>
+ 
+ Firstly, the project consists of following files.
+ 
+ <img width="348" alt="Screen Shot 2022-01-22 at 8 45 42 PM" src="https://user-images.githubusercontent.com/31994778/150649704-f73ed673-341e-41e7-9642-242973562a3e.png">
+
+Inside, `js` folder, we have 
+
+- <b>app.js</b>: The main file project runs on. Responsible for: 
+  - Holding `const formObject` object, which is submitted if all fields are valid.
+  - Holding DOM elements such as `const formDiv`, `const afterSubmitBox`, `const submitBtn`, `const refreshBtn` and more to handle DOM manipulation.
+  - Holding `validation rules` for form fields, such as:
+    - ```js
+      const fields = [
+      { field: nameField, validator: specialCharacterValidator },
+      { field: surnameField, validator: specialCharacterValidator },
+      { field: ageField, validator: ageValidator },
+       ];
+      ```
+  - Holding functions, i.e., `const submitForm`, `const prepareForm` to submit and prepare form.
+  - Holding `setInterval` function to check whether the form is valid. If valid, disable submit button, enable else.
+
+- <b>validators.js</b>: This is a helper file. Responsible for:
+  - Holding different validators, i.e., `const specialCharacterValidator`, and `const ageValidator`. We use specialCharacterValidator for `name` and `surname` fields, ageValidator for `age` field.
+  - Holding `const processClassList` function to change CSS dynamically, e.g., coloring background to red, if a field is invalid. (Such as age being different from integer)
+  - Exporting `specialCharacterValidator` and `ageValidator` so that `app.js` can use these functions.
+    - ```js
+      export { specialCharacterValidator, ageValidator };
+      ```
+- <b>helper.js</b>: This is a helper file. Responsible for:
+  - Holding `const addFocusOutEventListenerToAll` function to add event listener to all form fields on `focusout`. This looks like below:
+    - ```js
+      const addFocusOutEventListenerToAll = function(fields) {
+        for (let fieldObj of fields) {
+          fieldObj.field.addEventListener("focusout", () => {
+            fieldObj.validator(fieldObj.field.value, fieldObj.field);
+          });
+        }
+      };
+      ```
+  - Exporting `addFocusOutEventListenerToAll` function with `export { addFocusOutEventListenerToAll };`
+
+<b>Note:</b> In order for `app.js` to be able to export these functions from helper files, we need to define it as `module` in the `index.html` file, as:
+
+<img width="643" alt="Screen Shot 2022-01-22 at 9 07 45 PM" src="https://user-images.githubusercontent.com/31994778/150650351-21605a53-0781-46cf-8a0c-d0e62e22aa10.png">
+
+<b>Not defining `app.js` as `module`, we can't import helper functions from other js files.</b>
+
