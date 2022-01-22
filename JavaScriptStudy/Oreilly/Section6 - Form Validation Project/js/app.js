@@ -1,8 +1,4 @@
-import {
-  someFunction,
-  specialCharacterValidator,
-  ageValidator,
-} from "./validators.js";
+import { specialCharacterValidator, ageValidator } from "./validators.js";
 import { addFocusOutEventListenerToAll } from "./helper.js";
 
 const formObject = {
@@ -108,5 +104,3 @@ setInterval(() => {
     submitBtn.classList.remove("submit-btn-active");
   }
 }, 250);
-
-export default { submitBtn };
