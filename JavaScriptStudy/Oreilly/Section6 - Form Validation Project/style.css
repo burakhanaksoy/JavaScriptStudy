@@ -1,0 +1,49 @@
+.container {
+  min-height: 25vh;
+  border: 1px solid;
+  width: 20%;
+  border-radius: 20px;
+  padding: 20px 0px;
+  position: relative;
+}
+
+.invalid-field {
+  background: rgb(235, 136, 136);
+}
+
+.submit-btn-inactive {
+  pointer-events: none;
+  color: #ccc;
+}
+
+.submit-btn-active:hover {
+  background: aquamarine;
+  cursor: pointer;
+}
+
+.after-submit {
+  display: none;
+  min-height: 25vh;
+  position: absolute;
+  top: 40%;
+  z-index: 11;
+  left: 40%;
+  height: 10vh;
+  width: 20%;
+  margin-top: 5px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+
+.after-submit-active {
+  display: block;
+}
+
+.after-submit-inactive {
+  display: none;
+}
+
+#refresh:hover {
+  background: aquamarine;
+  cursor: pointer;
+}
