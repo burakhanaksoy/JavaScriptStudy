@@ -1,8 +1,8 @@
 const dragObject = {
-  x: null,
-  y: null,
-  mousePositionX: null,
-  mousePositionY: null,
+  x: undefined,
+  y: undefined,
+  mousePositionX: undefined,
+  mousePositionY: undefined,
 };
 
 const box = document.querySelector(".box");
