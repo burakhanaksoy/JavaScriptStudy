@@ -1,0 +1,13 @@
+.inner-box{
+    width:100px;
+    height:100px;
+    background-color: red;
+}
+
+.box{
+    position: absolute;
+    top:50vh;
+    left:50vw;
+    transform: translate(-50%, -50%);
+    cursor:move;
+}
