@@ -12,9 +12,9 @@ box.addEventListener("mousedown", function(e) {
   dragObject.y = box.offsetTop;
   dragObject.mousePositionX = e.clientX;
   dragObject.mousePositionY = e.clientY;
-  box.addEventListener("mousemove", drag);
-  box.addEventListener("mouseup", function() {
-    box.removeEventListener("mousemove", drag);
+  window.addEventListener("mousemove", drag);
+  window.addEventListener("mouseup", function() {
+    window.removeEventListener("mousemove", drag);
   });
 });
 
