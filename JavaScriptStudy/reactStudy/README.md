@@ -5,6 +5,7 @@
 - [1. Introduction to React](#1-introduction-to-react)
   - [1.1. File Structure](#11-file-structure)
   - [1.2. Virtual DOM](#12-virtual-dom)
+    - [1.2.1. Reconciliation](#121-reconciliation)
 ## 1. Introduction to React
 
 - Developed by Facebook.
@@ -59,3 +60,7 @@ The main reasons why we use Virtual DOM are:
   
 ![A working digital clock implementation with react code](images/how-does-virtual-dom-work-in-react.gif)
 
+#### 1.2.1. Reconciliation
+React uses a diffing algorithm to determine when to update real DOM. This is called `reconciliation`. 
+
+Find more on reconciliation [here](https://legacy.reactjs.org/docs/reconciliation.html).
