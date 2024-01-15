@@ -9,9 +9,6 @@ const colorList: string[] = [
   "#b21745",
 ];
 const originalColor: string = "#242424";
-let isButtonPressed: boolean = false;
-let isResetPressed: boolean = false;
-let pressCount: number = 0;
 
 const changeBackgroundColor = function (backgroundColor: string) {
   const root = document.documentElement;
@@ -19,7 +16,11 @@ const changeBackgroundColor = function (backgroundColor: string) {
 };
 
 export default function App() {
+  const [buttonPressed, setButtonPressed] = useState(false);
+  const [resetPressed, setResetPressed] = useState(false);
+  const [pressCount, setPressCount] = useState(0);
   const [currentColor, setCurrentColor] = useState(originalColor);
+
   useEffect(() => {
     changeBackgroundColor(currentColor);
   }, [currentColor]);
@@ -28,9 +29,9 @@ export default function App() {
     return (
       <button
         onClick={() => {
-          isButtonPressed = false;
-          isResetPressed = true;
-          pressCount = 0;
+          setButtonPressed(false);
+          setResetPressed(true);
+          setPressCount(0);
           setCurrentColor(originalColor);
         }}
       >
@@ -39,17 +40,17 @@ export default function App() {
     );
   };
 
-  function MyButton() {
+  function ColorChangeButton() {
     return (
       <button
         onClick={() => {
-          isButtonPressed = true;
-          isResetPressed = false;
+          setButtonPressed(true);
+          setResetPressed(false);
           setCurrentColor(colorList[pressCount]);
-          pressCount = (pressCount + 1) % colorList.length;
+          setPressCount((pressCount + 1) % colorList.length);
         }}
       >
-        {isButtonPressed && !isResetPressed
+        {buttonPressed && !resetPressed
           ? "Current color is " + `${currentColor}`
           : "Change Background Color"}
       </button>
@@ -58,7 +59,7 @@ export default function App() {
 
   return (
     <div className="button-container">
-      <MyButton />
+      <ColorChangeButton />
       <ResetColorButton />
     </div>
   );
