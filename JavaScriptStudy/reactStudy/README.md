@@ -192,4 +192,20 @@ This is why, we see the `Counter : 1`, console.log -> 0.
 
 #### 2.1.2. useEffect Hook
 
-TODO : talk about clean up function.
+`useEffect` Hook consists of two parts, i.e., setup function and cleanup function.
+
+```ts
+useEffect(() => {
+  setupCode...
+
+  return (() => {cleanupCode...})
+})
+```
+
+- setUp code runs when the component is first mounted on the page.
+- After every re-render of your component where the dependencies have changed:
+
+  - First, your cleanup code runs with the old props and state.
+  - Then, your setup code runs with the new props and state.
+
+- cleanUp code works whenever the component is unmounted.
