@@ -153,6 +153,43 @@ TLDR: `Always refrain from declarations like let pressCount: number = 0` as the 
 
 `useState` updates variables asyncronously. [This](https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately) is a question regarding this and the answers are to the point.
 
+The async behavior of `useState` can be seen in the following snippet
+
+```ts
+export default function CounterButton() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    console.log(count);
+  }, []);
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        Counter : {count}
+      </button>
+    </>
+  );
+}
+```
+
+Here, useEffect fires when app first mounted. However, setCount does not immediately update `count` value. It is updated in the next render. So, since the initial value is 0, count value remain 0 until the next re-render.
+
+This is why, we see the `Counter : 1`, console.log -> 0.
+
+![Alt text](<images/Screenshot 2024-01-16 at 18.13.50.png>)
+
 #### 2.1.2. useEffect Hook
 
 TODO : talk about clean up function.
