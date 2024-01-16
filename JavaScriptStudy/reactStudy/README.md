@@ -192,7 +192,6 @@ This is why, we see the `Counter : 1`, console.log -> 0.
 
 #### 2.1.2. useEffect Hook
 
-TODO : talk about clean up function.
 `useEffect` Hook consists of two parts, i.e., setup function and cleanup function.
 
 ```ts
