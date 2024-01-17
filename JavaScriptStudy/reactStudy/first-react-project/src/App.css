@@ -45,3 +45,25 @@
   display: grid;
   grid-gap: 10px;
 }
+
+.pointer-watch-block {
+  width: 500px;
+  height: 300px;
+  background-color: white;
+}
+
+.pointer-watch-block-cats {
+  width: 500px;
+  height: 300px;
+  background-color: white;
+}
+
+.cat-div {
+  display: flex;
+  overflow: auto;
+  /* justify-content: space-; */
+}
+
+img {
+  padding: 10px;
+}

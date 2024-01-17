@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import PointerWatcher from "./containers/pointerWatcher";
+import CatFriends from "./containers/catFriends";
 
 const colorList: string[] = [
   "#bf5656",
@@ -61,6 +63,8 @@ export default function App() {
     <div className="button-container">
       <ColorChangeButton />
       <ResetColorButton />
+      <PointerWatcher />
+      <CatFriends />
     </div>
   );
 }
