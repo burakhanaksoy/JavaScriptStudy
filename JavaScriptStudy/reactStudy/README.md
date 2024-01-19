@@ -11,7 +11,9 @@
     - [2.1.1. useState Hook](#211-usestate-hook)
       - [2.1.1.1. Why use useState?](#2111-why-use-usestate)
       - [2.1.1.2. Async behavior of useState](#2112-async-behavior-of-usestate)
+      - [2.1.1.3. Affect of primitives \& non-primitives on useState](#2113-affect-of-primitives--non-primitives-on-usestate)
     - [2.1.2. useEffect Hook](#212-useeffect-hook)
+    - [2.1.3. useRef Hook](#213-useref-hook)
 
 ## 1. Introduction to React
 
@@ -190,6 +192,58 @@ This is why, we see the `Counter : 1`, console.log -> 0.
 
 ![Alt text](<images/Screenshot 2024-01-16 at 18.13.50.png>)
 
+##### 2.1.1.3. Affect of primitives & non-primitives on useState
+
+As we know, change in state makes component re-render. So, a component like this would never update the state, hence does not re-render.
+
+```ts
+const MyCounter = () => {
+  console.log("rerender");
+  const [counter, setCounter] = useState(0);
+
+  const handleClick = () => {
+    setCounter(counter + 1);
+  };
+  return <button onClick={handleClick}>Counter</button>;
+};
+
+export default MyCounter;
+```
+
+console.log("rerender") will never print here, except the initial render.
+
+<b>We now know that if we don't set a different state in useState than the current state, the component won't re-render.</b>
+
+<b>We should also know that component will re-render if the state of component wasn't meant to be changed, but changed nonetheless.</b>
+
+<b>Component state will change continuously if useState is given an object type instead of a primitive type.</b>
+
+```ts
+const MyCounter = () => {
+  console.log("rerender");
+  const [person, setPerson] = useState({ name: "", lastName: "" });
+
+  const handleClick = () => {
+    setPerson({ name: "", lastName: "" });
+  };
+  return <button onClick={handleClick}>Counter</button>;
+};
+```
+
+This will always print `rerender` since javascript equality operator does not look for references.
+
+```
+rerender
+rerender
+rerender
+rerender
+rerender
+rerender
+rerender
+```
+
+<strong style="background-color:yellow;color:black"  >This is why, we should always make sure the variable we use with useState is a primitive type, rather than object type.</strong>
+
 #### 2.1.2. useEffect Hook
 
 `useEffect` Hook consists of two parts, i.e., setup function and cleanup function.
@@ -209,3 +263,5 @@ useEffect(() => {
   - Then, your setup code runs with the new props and state.
 
 - cleanUp code works whenever the component is unmounted.
+
+#### 2.1.3. useRef Hook
