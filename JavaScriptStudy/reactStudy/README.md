@@ -8,12 +8,13 @@
     - [1.2.1. Reconciliation](#121-reconciliation)
 - [2. Small React Projects \& Hooks](#2-small-react-projects--hooks)
   - [2.1. Background Color Change Project](#21-background-color-change-project)
-    - [2.1.1. useState Hook](#211-usestate-hook)
-      - [2.1.1.1. Why use useState?](#2111-why-use-usestate)
-      - [2.1.1.2. Async behavior of useState](#2112-async-behavior-of-usestate)
-      - [2.1.1.3. Affect of primitives \& non-primitives on useState](#2113-affect-of-primitives--non-primitives-on-usestate)
-    - [2.1.2. useEffect Hook](#212-useeffect-hook)
-    - [2.1.3. useRef Hook](#213-useref-hook)
+  - [2.2. useState Hook](#22-usestate-hook)
+    - [2.2.1. Why use useState?](#221-why-use-usestate)
+    - [2.2.2. Async behavior of useState](#222-async-behavior-of-usestate)
+    - [2.2.3. Affect of primitives \& non-primitives on useState](#223-affect-of-primitives--non-primitives-on-usestate)
+  - [2.3. useEffect Hook](#23-useeffect-hook)
+  - [2.4. useRef Hook](#24-useref-hook)
+  - [2.5. Custom Hooks](#25-custom-hooks)
 
 ## 1. Introduction to React
 
@@ -97,7 +98,7 @@ return (
 
 Here, I use `useState`, and `useEffect` hooks to hold and change the state of current color, and trigger `changeBackgroundColor` function when the state of current color changes.
 
-#### 2.1.1. useState Hook
+### 2.2. useState Hook
 
 In React, any function that start with `use` prefix is called a Hook, e.g., `useState`.
 
@@ -144,14 +145,14 @@ function ColorChangeButton() {
 
 This is a basic use of `useState` Hook in react.
 
-##### 2.1.1.1. Why use useState?
+#### 2.2.1. Why use useState?
 
 - <strong>Local variables don’t persist between renders.</strong> When React renders this component a second time, it renders it from scratch—it doesn’t consider any changes to the local variables.
 - <strong>Changes to local variables won’t trigger renders.</strong> React doesn’t realize it needs to render the component again with the new data.
 
 TLDR: `Always refrain from declarations like let pressCount: number = 0` as the pressCount will be redeclared with each rendering.
 
-##### 2.1.1.2. Async behavior of useState
+#### 2.2.2. Async behavior of useState
 
 `useState` updates variables asyncronously. [This](https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately) is a question regarding this and the answers are to the point.
 
@@ -190,9 +191,9 @@ Here, useEffect fires when app first mounted. However, setCount does not immedia
 
 This is why, we see the `Counter : 1`, console.log -> 0.
 
-![Alt text](<images/Screenshot 2024-01-16 at 18.13.50.png>)
+<img src="images/Screenshot 2024-01-16 at 18.13.50.png" style="height:500px; width:500px;">
 
-##### 2.1.1.3. Affect of primitives & non-primitives on useState
+#### 2.2.3. Affect of primitives & non-primitives on useState
 
 As we know, change in state makes component re-render. So, a component like this would never update the state, hence does not re-render.
 
@@ -244,7 +245,7 @@ rerender
 
 <strong style="background-color:yellow;color:black"  >This is why, we should always make sure the variable we use with useState is a primitive type, rather than object type.</strong>
 
-#### 2.1.2. useEffect Hook
+### 2.3. useEffect Hook
 
 `useEffect` Hook consists of two parts, i.e., setup function and cleanup function.
 
@@ -264,4 +265,44 @@ useEffect(() => {
 
 - cleanUp code works whenever the component is unmounted.
 
-#### 2.1.3. useRef Hook
+### 2.4. useRef Hook
+
+TODO: add useRef Hook
+
+### 2.5. Custom Hooks
+
+React provides lots of hooks by default. So far we have mentioned three of those.
+
+What makes a hook special is that it can be used by different components, serving the same purpose. `useState` sets / retrieves the state of a variable, `useRef` points to an element with which we use built-in javascript functions.
+
+<strong style="background-color:yellow;color:black">To summarize, Hooks are functions that contains logic inside that can be used by different components, alleviating repetition of the same coding again and again.</strong>
+
+For example, I might have different components in my project that will track the percentage of my laptop / mobile device battery and do something with it need be.
+
+<img src="Screen Recording 2024-01-20 at 22.44.57-1.gif" style="height:300px; width:500px;">
+
+This component can be found under `/src/containers/battery.tsx`. Here, the component uses `useBatteryStatus` custom Hook to get battery percentage and charging boolean.
+
+```tsx
+export default function Battery() {
+  const batteryStatus = useBatteryStatus();
+
+  const batteryPercentage = batteryStatus ? batteryStatus.level * 100 : 0;
+
+  return (
+    <div style={{ minHeight: "250px", maxHeight: "250px" }}>
+      {batteryStatus?.charging ? (
+        <>
+          <p className="battery-charging">
+            Battery charging 🔋 (%{batteryPercentage})
+          </p>
+        </>
+      ) : (
+        <p>Battery not charging 🪫 (%{batteryPercentage})</p>
+      )}
+    </div>
+  );
+}
+```
+
+Here, we can easily get battery information with `useBatteryStatus` hook in other components. With this, we refrain from writing the same logic again and again.

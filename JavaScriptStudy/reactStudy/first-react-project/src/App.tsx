@@ -4,6 +4,7 @@ import PointerWatcher from "./containers/pointerWatcher";
 import CatFriends from "./containers/catFriends";
 import MyForm from "./containers/myForm";
 import MyArticle from "./containers/article";
+import Battery from "./containers/battery";
 
 const colorList: string[] = [
   "#bf5656",
@@ -63,12 +64,13 @@ export default function App() {
 
   return (
     <div className="button-container">
-      <ColorChangeButton />
+      {/* <ColorChangeButton />
       <ResetColorButton />
       <PointerWatcher />
       <CatFriends />
       <MyForm />
-      <MyArticle />
+      <MyArticle /> */}
+      <Battery />
     </div>
   );
 }

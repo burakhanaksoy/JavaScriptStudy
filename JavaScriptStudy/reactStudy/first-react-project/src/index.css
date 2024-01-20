@@ -66,3 +66,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@keyframes changeColor {
+  from {
+    color: #00a0d6;
+  }
+  to {
+    color: #d78500;
+  }
+}
+
+.battery-charging {
+  animation: changeColor 1s infinite alternate;
+}
