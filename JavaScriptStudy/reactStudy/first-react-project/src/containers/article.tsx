@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 
+type BaseApiResponse = {
+  title: string;
+  body: string;
+};
+
+interface ApiResponse extends BaseApiResponse {
+  id: number;
+}
+
 const MyArticle = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<ApiResponse | null>(null);
   const [page, setPage] = useState(1);
 
   const endpoint = `https://dummyjson.com/posts/${page}`;
@@ -39,8 +48,8 @@ const MyArticle = () => {
             overflow: "auto",
           }}
         >
-          <h5 style={{ opacity: 1, color: "black" }}>{data?.title}</h5>
-          <p style={{ opacity: 1, color: "black" }}>{data?.body}</p>
+          <h5 style={{ opacity: 1, color: "black" }}>{data.title}</h5>
+          <p style={{ opacity: 1, color: "black" }}>{data.body}</p>
         </article>
       ) : (
         <div
