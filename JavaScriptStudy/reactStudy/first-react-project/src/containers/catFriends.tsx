@@ -1,14 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function CatFriends() {
   const firstCatRef = useRef(null);
   const secondCatRef = useRef(null);
   const thirdCatRef = useRef(null);
-  const divRef = useRef(null);
-
-  useEffect(() => {
-    console.log("useEffect girdi", divRef);
-  }, []);
 
   function handleScrollToFirstCat() {
     firstCatRef.current.scrollIntoView({
@@ -36,7 +31,7 @@ export default function CatFriends() {
 
   return (
     <>
-      <div ref={divRef} className="pointer-watch-block-cats">
+      <div className="pointer-watch-block-cats">
         <nav>
           <button onClick={handleScrollToFirstCat}>Tom</button>
           <button onClick={handleScrollToSecondCat}>Maru</button>
