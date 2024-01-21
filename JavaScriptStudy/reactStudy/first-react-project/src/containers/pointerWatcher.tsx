@@ -26,7 +26,6 @@ export default function PointerWatcher() {
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
-      console.log("cikti");
     };
   }, []);
 

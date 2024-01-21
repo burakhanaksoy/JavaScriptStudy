@@ -28,7 +28,6 @@ const MyArticle = () => {
       })
       .then((json) => {
         setData(json);
-        console.log(json);
         return;
       });
   };
