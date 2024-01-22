@@ -15,6 +15,7 @@
   - [2.3. useEffect Hook](#23-useeffect-hook)
   - [2.4. useRef Hook](#24-useref-hook)
   - [2.5. Custom Hooks](#25-custom-hooks)
+    - [2.5.1. Sharing State Between Components](#251-sharing-state-between-components)
 
 ## 1. Introduction to React
 
@@ -279,7 +280,7 @@ What makes a hook special is that it can be used by different components, servin
 
 For example, I might have different components in my project that will track the percentage of my laptop / mobile device battery and do something with it need be.
 
-<img src="Screen Recording 2024-01-20 at 22.44.57-1.gif" style="height:300px; width:500px;">
+<img src="./images/Screen Recording 2024-01-20 at 22.44.57-1.gif" style="height:300px; width:500px;">
 
 This component can be found under `/src/containers/battery.tsx`. Here, the component uses `useBatteryStatus` custom Hook to get battery percentage and charging boolean.
 
@@ -304,3 +305,62 @@ export default function Battery() {
 ```
 
 Here, we can easily get battery information with `useBatteryStatus` hook in other components. With this, we refrain from writing the same logic again and again.
+
+<strong style="background-color:yellow;color:black"  >It's important to know that custom hooks share the same logic, not the variable state.</strong>
+
+<b>Two components may use the same hook, but the state of variables will not be dependent to one another.</b>
+
+#### 2.5.1. Sharing State Between Components
+
+I've written an example where the button is clicked to show user information.
+
+![Alt text](<Screen Recording 2024-01-22 at 15.39.17.gif>)
+
+As you can see, these components do not share the same button state. Both user cards show up when button is pressed.
+
+`How can we make it so that when a button is pressed on one card, the other card closes and the one we press opens?`
+
+Answer lies here: [Sharing State Between Components
+](https://react.dev/learn/sharing-state-between-components)
+
+After some changes, we now have two components aware of each other's states.
+
+![Alt text](deneme.gif)
+
+As you can see, when we click show on one card, the other card closes.
+
+This is done as follows:
+
+1- Passing a controlling variable to child components from a parent component. (activeIndex)
+
+2- Listening to events within child components and call functions when event happens. (onShow, onHide)
+
+The main component Cards is as follows:
+
+```tsx
+const Cards = () => {
+  const userInfos = [
+    ...
+  ];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div>
+      {userInfos.map((userInfo) => (
+        <ProfileCard
+          key={userInfo.id}
+          userInfo={userInfo}
+          index={userInfo.id}
+          activeIndex={activeIndex}
+          onShow={() => setActiveIndex(userInfo.id)}
+          onHide={() => setActiveIndex(0)}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Cards;
+```
+
+We pass these props to `ProfileCard` component and the magic happens.

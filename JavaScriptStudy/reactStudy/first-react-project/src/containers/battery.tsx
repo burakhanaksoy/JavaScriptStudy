@@ -42,7 +42,7 @@ export default function Battery() {
     : 0;
 
   return (
-    <div style={{ minHeight: "250px", maxHeight: "250px" }}>
+    <div>
       {batteryStatus?.charging ? (
         <p className="battery-charging">
           Battery charging 🔋 (%{batteryPercentage})
