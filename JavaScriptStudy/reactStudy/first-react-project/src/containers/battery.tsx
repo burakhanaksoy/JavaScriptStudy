@@ -37,10 +37,12 @@ const useBatteryStatus = () => {
 export default function Battery() {
   const batteryStatus = useBatteryStatus();
 
-  const batteryPercentage = batteryStatus ? batteryStatus.level * 100 : 0;
+  const batteryPercentage = batteryStatus
+    ? Math.round(batteryStatus.level * 100)
+    : 0;
 
   return (
-    <div style={{ minHeight: "250px", maxHeight: "250px" }}>
+    <div>
       {batteryStatus?.charging ? (
         <p className="battery-charging">
           Battery charging 🔋 (%{batteryPercentage})
