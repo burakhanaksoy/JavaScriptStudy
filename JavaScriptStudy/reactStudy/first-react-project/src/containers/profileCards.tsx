@@ -23,18 +23,14 @@ const ProfileCard: FC<UserInfoProps> = ({
   <>
     {activeIndex === index ? (
       <div>
-        <div>
-          <img
-            width="140px"
-            height="100px"
-            src={userInfo?.imageSrc}
-            style={{ borderRadius: "20%", objectFit: "cover" }}
-          />
-        </div>
-        <div>
-          <p>{userInfo.name}</p>
-          <p>{userInfo.job}</p>
-        </div>
+        <img
+          width="140px"
+          height="100px"
+          src={userInfo?.imageSrc}
+          style={{ borderRadius: "20%", objectFit: "cover" }}
+        />
+        <p>{userInfo.name}</p>
+        <p>{userInfo.job}</p>
         <button onClick={onHide}> Hide </button>
       </div>
     ) : (
