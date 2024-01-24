@@ -16,6 +16,8 @@
   - [2.4. useRef Hook](#24-useref-hook)
   - [2.5. Custom Hooks](#25-custom-hooks)
     - [2.5.1. Sharing State Between Components](#251-sharing-state-between-components)
+- [3. React APIs](#3-react-apis)
+  - [3.1. forwardRef](#31-forwardref)
 
 ## 1. Introduction to React
 
@@ -364,3 +366,54 @@ export default Cards;
 ```
 
 We pass these props to `ProfileCard` component and the magic happens.
+
+## 3. React APIs
+
+### 3.1. forwardRef
+
+<b>We use forwardRef to expose a child component to the parent component.</b>
+
+For example, I have a simple input component that takes an input from the user.
+
+I need this component to focus on input field when clicked on the button.
+
+![Alt text](<Screen Recording 2024-01-24 at 23.27.13.gif>)
+
+What's tricky here is that I cannot give ref directly to the parent component.
+
+```tsx
+const Post: FC = () => {
+  const commentInputRef = useRef<HTMLInputElement | null>(null);
+
+  return (
+    <div className="post-box">
+      <CommentInput ref={commentInputRef} />
+    </div>
+  );
+};
+
+export default Post;
+```
+
+Here, the parent component is `Post` component, and the node I want to focus on is `input` element node, which is in `CommentInput` container.
+
+```tsx
+const CommentInput = ({}, ref: HTMLInputElement) => {
+  const onButtonClicked = () => {
+    ref.current.focus();
+  };
+
+  return (
+    <>
+      <input type="text" ref={ref} />
+      <button type="submit" onClick={onButtonClicked}>
+        Focus!
+      </button>
+    </>
+  );
+};
+
+export default forwardRef(CommentInput);
+```
+
+Here, we use `forwardRef` to expose input node's reference to the parent component.
