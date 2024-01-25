@@ -8,6 +8,7 @@ import Battery from "./containers/battery";
 import ProfileCard from "./containers/profileCards";
 import Cards from "./containers/cards";
 import Post from "./containers/post/Post";
+import Stopwatch from "./containers/stopwatch/Stopwatch";
 
 const colorList: string[] = [
   "#bf5656",
@@ -75,7 +76,8 @@ export default function App() {
       <MyArticle />
       <Battery />
       <Cards /> */}
-      <Post />
+      {/* <Post /> */}
+      <Stopwatch />
     </div>
   );
 }

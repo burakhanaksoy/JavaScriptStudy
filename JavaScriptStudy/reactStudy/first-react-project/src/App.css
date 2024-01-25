@@ -68,3 +68,13 @@
 img {
   padding: 10px;
 }
+
+.stopwatch-box {
+  display: flex;
+  min-width: 15rem;
+  min-height: 10rem;
+  border: solid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
