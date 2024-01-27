@@ -16,6 +16,13 @@
   - [2.4. useRef Hook](#24-useref-hook)
   - [2.5. Custom Hooks](#25-custom-hooks)
     - [2.5.1. Sharing State Between Components](#251-sharing-state-between-components)
+- [3. React APIs](#3-react-apis)
+  - [3.1. forwardRef](#31-forwardref)
+    - [3.1.1. Idea Behind Referencing](#311-idea-behind-referencing)
+    - [3.1.2. Focus Example](#312-focus-example)
+    - [3.1.3. Stopwatch Example](#313-stopwatch-example)
+    - [3.1.4. Caveats of Refs](#314-caveats-of-refs)
+- [4. References](#4-references)
 
 ## 1. Introduction to React
 
@@ -364,3 +371,127 @@ export default Cards;
 ```
 
 We pass these props to `ProfileCard` component and the magic happens.
+
+## 3. React APIs
+
+### 3.1. forwardRef
+
+<b>We use forwardRef to expose a child component to the parent component.</b>
+
+#### 3.1.1. Idea Behind Referencing
+
+<strong style="background-color:yellow;color:black"  >If your component needs to store some value, but it doesn’t impact the rendering logic, choose refs.</strong>
+
+Typically, you will use a ref when your component needs to “step outside” React and communicate with external APIs—often a browser API that won’t impact the appearance of the component. Here are a few of these rare situations:
+
+- Storing timeout IDs
+- Storing and manipulating DOM elements, like using browser APIs such as `scrollIntoView` and `focus`
+
+#### 3.1.2. Focus Example
+
+For example, I have a simple input component that takes an input from the user.
+
+I need this component to focus on input field when clicked on the button.
+
+![Alt text](<Screen Recording 2024-01-24 at 23.27.13.gif>)
+
+What's tricky here is that I cannot give ref directly to the parent component.
+
+```tsx
+const Post: FC = () => {
+  const commentInputRef = useRef<HTMLInputElement | null>(null);
+
+  return (
+    <div className="post-box">
+      <CommentInput ref={commentInputRef} />
+    </div>
+  );
+};
+
+export default Post;
+```
+
+Here, the parent component is `Post` component, and the node I want to focus on is `input` element node, which is in `CommentInput` container.
+
+```tsx
+const CommentInput = ({}, ref: HTMLInputElement) => {
+  const onButtonClicked = () => {
+    ref.current.focus();
+  };
+
+  return (
+    <>
+      <input type="text" ref={ref} />
+      <button type="submit" onClick={onButtonClicked}>
+        Focus!
+      </button>
+    </>
+  );
+};
+
+export default forwardRef(CommentInput);
+```
+
+Here, we use `forwardRef` to expose input node's reference to the parent component.
+
+#### 3.1.3. Stopwatch Example
+
+We mentioned that refs is useful for storing timerID. Here is an example of that
+
+![Alt text](<Screen Recording 2024-01-25 at 13.46.02.gif>)
+
+Here we used ref to store a timerID since refs do not cause re-rendering and we do not need to re-render DOM as timerID changes. We just need to set it with setInterval and clear with clearInterval.
+
+```tsx
+import React, { FC, useRef, useState } from "react";
+
+const Stopwatch: FC = () => {
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const intervalID = useRef<number>();
+
+  const handleStart = () => {
+    const now = Date.now();
+    handleStop();
+    setTimeElapsed(0);
+    intervalID.current = setInterval(() => {
+      setTimeElapsed((Date.now() - now) / 1000);
+    }, 10);
+  };
+
+  const handleStop = () => {
+    clearInterval(intervalID.current);
+  };
+  return (
+    <>
+      <div>
+        <p>{timeElapsed.toFixed(3)} s</p>
+        <div>
+          <button onClick={handleStart}>Start</button>
+          <button onClick={handleStop}>Stop</button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Stopwatch;
+```
+
+<strong style="background-color:yellow;color:black" >We should use useState for variables that should cause re-rendering.</strong>
+
+#### 3.1.4. Caveats of Refs
+
+- Refs are an escape hatch to hold onto values that aren’t used for rendering. You won’t need them often.
+- A ref is a plain JavaScript object with a single property called current, which you can read or set.
+- You can ask React to give you a ref by calling the useRef Hook.
+- Like state, refs let you retain information between re-renders of a component.
+- Unlike state, setting the ref’s current value does not trigger a re-render.
+- Don’t read or write ref.current during rendering. This makes your component hard to predict.
+
+## 4. References
+
+- https://react.dev/learn/referencing-values-with-refs
+- https://react.dev/learn/sharing-state-between-components
+- https://react.dev/learn/state-a-components-memory
+- https://react.dev/reference/react/forwardRef
+- https://react.dev/learn/manipulating-the-dom-with-refs
